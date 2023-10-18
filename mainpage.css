@@ -1,0 +1,184 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color for the entire page */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+header {
+    background-color: #002855; /* UMKC's official blue color */
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* Navigation menu */
+nav {
+    background-color: #003366; /* Slightly darker blue */
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 10px;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Main content area */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Headings and text styles */
+h1 {
+    color: #002855; /* UMKC blue for headings */
+    font-size: 28px;
+}
+
+h2 {
+    color: #002855;
+    font-size: 24px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* Links */
+a {
+    color: #0066cc; /* UMKC's official link color */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #002855;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Additional styles can be added as needed */
+
+/* Responsive design (adjust as needed) */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #0066CC;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #0066CC;
+    color: black;
+  }
+
+  /* Style the video container */
+/* .video-container {
+    max-width: 100%;
+    position: relative;
+  }
+   */
+  /* Style the video itself */
+  /* video {
+    width: 100%;
+    height: auto;
+  } */
+  
+  /* Add some padding or margins if needed */
+  /* .video-container {
+    margin: 20px;
+  }
+   */
+  /* Add a border or box shadow if desired */
+  video {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+/* 
+  video{
+    max-width: 100%;
+    height: auto;
+  } */
+
+  .bgvid-bottom bgvid--show {
+    --hero-height: 690px;
+    position: relative;
+}
+
+
+.round-image{
+    display: inline-block;
+        border-radius: 50%; /* This will make the image round */
+    width: 350px; /* Adjust the width and height as needed */
+    height: 350px;
+}
+.text {
+    display: inline-block;
+    vertical-align: top; /* Align the text to the top of the image */
+    margin-left: 20px; /* Adjust the margin as needed */
+}
+
+
+.cheifs {
+    display: flex; /* Use flexbox for easy alignment */
+    align-items: center; /* Center vertically */
+   
+}
+
+
+.cheifs h1 {
+    margin-left: 50px; /* Adjust the margin as needed to create space between the image and text */
+    
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.cheifs{
+    padding: 20px;
+    background-color: whitesmoke;
+}
+

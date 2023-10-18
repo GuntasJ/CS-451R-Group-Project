@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: arial, sans-serif;
+  }
+  body{
+    background-image: url("https://www.umkc.edu/news/images/UMKC_BSM_Courtyard.jpg");
+    background-repeat: no-repeat;
+    position: fixed;
+  }
+  .container{
+    width: 1400px;
+    height: 100vh;
+    background: rgba(71,71,86,0.2);
+  }
+  .wrapper{
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+  }
+  .login-page{
+    width: 400px;
+    background: rgba(58,61,84,0.5);
+  }
+  .login-page input{
+    margin: 10px 20px;
+  }
+  .login-page input[type="text"],input[type="password"]{
+    width: 90%;
+    height: 45px;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    font-weight: 300;
+    font-size: 18px;
+    border-bottom: 2px solid #FFBB32;
+    background: rgba(255,255,255,0);
+    color: #F4D450;
+  }
+  .login-page input[type="submit"]{
+    margin-left: 65%;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    border: 0;
+    outline: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+    background: rgba(255,255,255,0);
+    color: #fff;
+  }
+  .login-page input[type="submit"]:hover{
+    border: 1px solid  #FFBB32;
+    color:  #FFBB32;
+    transition: all .5s ease;
+  }

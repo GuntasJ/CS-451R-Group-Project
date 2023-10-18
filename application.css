@@ -1,0 +1,85 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color for the entire page */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+   
+            
+}
+
+
+/* Header styles */
+header {
+    background-color: #002855; /* UMKC's official blue color */
+    color: #ffffff;
+    padding: 10px;
+
+}
+/* Main content area */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Headings and text styles */
+h1 {
+    color: #002855; /* UMKC blue for headings */
+    font-size: 28px;
+}
+
+h2 {
+    color: #002855;
+    font-size: 24px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* Links */
+a {
+    color: #0066cc; /* UMKC's official link color */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Footer */
+footer {
+    background-color: #002855;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+}
+
+h60 {
+    font-family: Oswald,sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0066cc;
+}
+
+.application{
+    padding: 0;
+   h60{text-align: center;}
+}
+
+
+h30 {
+    color: black; /* UMKC blue for headings */
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Oswald,sans-serif;
+    text-align: center;
+}
+
