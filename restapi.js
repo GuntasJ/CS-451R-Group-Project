@@ -2,6 +2,8 @@ const baseApiPath = 'http://10.205.3.54:8080/tags/api/v1'
 
 //Students API
 
+//This is the code that is used for all the requests
+
 export async function getAllStudents() {
     const response = await fetch(`${baseApiPath}/students`)
     const data = await response.json()
