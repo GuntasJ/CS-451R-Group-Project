@@ -1,0 +1,20 @@
+import { getAllPositions } from "./restapi.js"
+
+async function displayAllPositions() {
+    const positions = await getAllPositions()
+    console.log(positions)
+    for(let i = 0; i < positions.length; i++) {
+        displayPosition(positions[i])
+    }
+}
+
+function displayPosition(position) {
+    let div = document.getElementById("card")
+    let h5 = document.createElement('h5')
+    h5.innerHTML = `${position["classType"]} ${position["courseNumber"]} (${position["semester"]})`
+    h5.className = 'card-header target'
+    div.append(h5)
+}
+window.onload = function() {
+    displayAllPositions()
+}
