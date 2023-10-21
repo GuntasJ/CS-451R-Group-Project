@@ -36,9 +36,7 @@ function createStudentObjectFromArrayWithoutId(studentInfo) {
 
 
 window.addEventListener('load', function() {
-    document.getElementById('submit-form').addEventListener('submit', async function(e) {
-        e.preventDefault()
-
+    document.getElementById('submit-form').addEventListener('submit', async function() {
         let studentInfo = getAllStudentInformationFromPage()
 
         let file = document.getElementById('file_upload').files[0]
@@ -47,7 +45,9 @@ window.addEventListener('load', function() {
 
         let response = await uploadFile(formData)
         let fileId = response["id"]
+        console.log(fileId)
 
-        await addNewStudentWithFile(createStudentObjectFromArrayWithoutId(studentInfo), fileId)
+        let response1 = await addNewStudentWithFile(createStudentObjectFromArrayWithoutId(studentInfo), fileId)
+        console.log(response1)
     })
 })
