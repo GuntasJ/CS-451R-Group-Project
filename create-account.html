@@ -60,6 +60,7 @@
         <title>UMKC Welcome</title>
 </head>
 <body>
+    <script type="module" src="create-account.js"></script>
     <div class="container">
         <div class="header sticky-top">
             <img class="img-header" src="your-logo.png" alt="Logo">
@@ -73,7 +74,7 @@
             <!--<button class="btn btn-apply" type="button">Apply Now</button>-->
         </div>
 
-        <form action="submit.php" method="POST" enctype="multipart/form-data" class="was-validated">
+        <form action="submit.php" method="POST" enctype="multipart/form-data" id="submit-form" class="was-validated">
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" required class="form-control">
 
@@ -110,7 +111,7 @@
 
             <label for="file_upload" class="file-label">File Upload:</label>
             <div class="input-group file-input-group">
-                <input type="file" id="file_upload" name="file_upload" class="form-control">
+                <input type="file" id="file_upload" name="file_upload" required class="form-control">
                 <!--<button class="btn btn-primary file-dropdown-toggle" type="button">Browse</button>-->
             </div>
 

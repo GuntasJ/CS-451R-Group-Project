@@ -38,7 +38,7 @@ function createPositionObjectFromArrayWithoutId(positionInfo) {
 }
 
 window.addEventListener('load', function() {
-    getAllPositions().then(data => console.log(data))
+    //getAllPositions().then(data => console.log(data))
     document.getElementById("courseform").addEventListener('submit',async function() {
         let positionInfo = getAllPositionInfoFromPage()
         console.log("creating position")

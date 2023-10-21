@@ -117,11 +117,18 @@ export async function deleteApplication() {
 //file transfer
 
 export async function getAllFiles() {
-
+    const response = await fetch(`${baseApiPath}/files`)
+    const data = await response.json()
+    return data
 }
 
-export async function uploadFile() {
-
+export async function uploadFile(formData) {
+    const response = await fetch(`${baseApiPath}/files`, {
+        method: 'POST',
+        body: formData
+    })
+    const data = await response.json()
+    return data
 }
 
 export async function updateFile() {
