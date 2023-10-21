@@ -1,11 +1,11 @@
-import { addNewStudent } from "./restapi.js"
+import { addNewStudent, addNewStudentWithFile, uploadFile } from "./restapi.js"
 
 function getAllStudentInformationFromPage() {
     let firstName = document.getElementById('first_name').value
     let lastName = document.getElementById('last_name').value
     let studentId = parseInt(document.getElementById('student_id').value)
     let umkcEmail = document.getElementById('umkc_email').value
-    let currentLevel = document.getElementById('cuurent_level').value
+    let currentLevel = document.getElementById('current_level').value
     let graduatingSemester = document.getElementById('graduating_semester').value
     let umkcGPA = parseFloat(document.getElementById('umkc_gpa').value)
     let hoursUMKC = parseInt(document.getElementById('hours_completed').value)
@@ -29,15 +29,25 @@ function createStudentObjectFromArrayWithoutId(studentInfo) {
         umkcGPA: studentInfo[6],
         hoursDoneAtUmkc: studentInfo[7],
         undergraduateDegree: studentInfo[8],
-         currentMajor: studentInfo[9]
+        currentMajor: studentInfo[9]
     }
 }
 
 
 
 window.addEventListener('load', function() {
-    document.getElementById('submit-form').addEventListener('submit', async function() {
+    document.getElementById('submit-form').addEventListener('submit', async function(e) {
+        e.preventDefault()
+
         let studentInfo = getAllStudentInformationFromPage()
-        await addNewStudent(createStudentObjectFromArrayWithoutId(studentInfo))
+
+        let file = document.getElementById('file_upload').files[0]
+        let formData = new FormData()
+        formData.append("file", file)
+
+        let response = await uploadFile(formData)
+        let fileId = response["id"]
+
+        await addNewStudentWithFile(createStudentObjectFromArrayWithoutId(studentInfo), fileId)
     })
 })
