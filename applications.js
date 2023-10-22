@@ -20,8 +20,8 @@ async function addStudentRows() {
         let cell5 = row.insertCell()
         let cell6 = row.insertCell()
         let cell7 = row.insertCell()
-        //let cell8 = row.insertCell()
-        //let cell9 = row.insertCell(8)
+        let cell8 = row.insertCell()
+        let cell9 = row.insertCell()
 
         cell1.innerHTML = studentList[i]["studentId"]
         cell2.innerHTML = studentList[i]["firstName"] + " " + studentList[i]["lastName"]
@@ -30,7 +30,17 @@ async function addStudentRows() {
         cell5.innerHTML = studentList[i]["currentMajor"]
         cell6.innerHTML = studentList[i]["umkcGPA"]
         cell7.innerHTML = studentList[i]["hoursDoneAtUmkc"]
+        cell8.innerHTML = "TODO: Add GTA Functionality"
         
+        let link = document.createElement("a")
+        link.setAttribute("href", "http://www.microsoft.com")
+
+        let file = studentList[i]["file"]
+
+        let linkText = document.createTextNode(file["name"])
+        link.appendChild(linkText)
+
+        cell9.appendChild(link)
     }
 }
 

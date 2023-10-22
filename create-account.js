@@ -33,11 +33,13 @@ function createStudentObjectFromArrayWithoutId(studentInfo) {
     }
 }
 
-
+window.onbeforeunload = function() {
+    window.scrollTo(0, 0)
+}
 
 window.addEventListener('load', function() {
-    document.getElementById('submit-form').addEventListener('submit', async function() {
-        
+    document.getElementById('submit-form').addEventListener('submit', async function(event) {
+        event.preventDefault()
         let studentInfo = getAllStudentInformationFromPage()
 
         let file = document.getElementById('file_upload').files[0]
@@ -50,5 +52,7 @@ window.addEventListener('load', function() {
 
         let response1 = await addNewStudentWithFile(createStudentObjectFromArrayWithoutId(studentInfo), fileId)
         console.log(response1)
+
+        location.reload()
     })
 })
