@@ -5,21 +5,18 @@ function getAllPositionInfoFromPage() {
     let positionClassType = document.getElementById("CourseType").value
     let positionCourseNumber = document.getElementById("CourseNumber").value
     let poitionDegree = document.getElementById("level").value
-    let fallSemester = "";
-    let springSemester = "";
-    let summerSemester = "";
+    let positionSemester = []
 
     if(document.getElementById("checkbox_0").checked) {
-        fallSemester = "Fall"
+        positionSemester.push("Fall")
     }
     if(document.getElementById("checkbox_1").checked) {
-        springSemester = "Spring"
+        positionSemester.push("Spring")
     }
     if(document.getElementById("checkbox_2").checked) {
-        summerSemester = "Summer"
+        positionSemester.push("Summer")
     }
 
-    let positionSemester = `${fallSemester},${springSemester},${summerSemester}`
     let positionType = document.getElementById("position").value
     let positionsNotes = document.getElementById("notes").value
 

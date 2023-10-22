@@ -37,6 +37,7 @@ function createStudentObjectFromArrayWithoutId(studentInfo) {
 
 window.addEventListener('load', function() {
     document.getElementById('submit-form').addEventListener('submit', async function() {
+        
         let studentInfo = getAllStudentInformationFromPage()
 
         let file = document.getElementById('file_upload').files[0]
