@@ -1,4 +1,4 @@
-const baseApiPath = 'http://10.205.3.54:8080/tags/api/v1'
+const baseApiPath = 'http://localhost:8080/tags/api/v1'
 
 //Students API
 
@@ -12,6 +12,18 @@ export async function getAllStudents() {
 
 export async function addNewStudent(student) {
     const response = await fetch(`${baseApiPath}/students`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(student)
+    })
+    const data = await response.json()
+    return data
+}
+
+export async function addNewStudentWithFile(student, fileId) {
+    const response = await fetch(`${baseApiPath}/students?file_id=${fileId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -117,11 +129,18 @@ export async function deleteApplication() {
 //file transfer
 
 export async function getAllFiles() {
-
+    const response = await fetch(`${baseApiPath}/files`)
+    const data = await response.json()
+    return data
 }
 
-export async function uploadFile() {
-
+export async function uploadFile(formData) {
+    const response = await fetch(`${baseApiPath}/files`, {
+        method: 'POST',
+        body: formData
+    })
+    const data = await response.json()
+    return data
 }
 
 export async function updateFile() {

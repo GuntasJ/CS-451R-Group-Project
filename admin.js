@@ -8,10 +8,19 @@ async function displayAllPositions() {
     }
 }
 
+function getSemesterAsString(position) {
+    let semesterList = position["semester"]
+    let semesterString = ""
+    for(let i = 0; i < semesterList.length; i++) {
+        semesterString += semesterList[i] + "/"
+    }
+    return semesterString.slice(0, -1)
+}
+
 function displayPosition(position) {
     let div = document.getElementById("card")
     let h5 = document.createElement('h5')
-    h5.innerHTML = `${position["classType"]} ${position["courseNumber"]} (${position["semester"]})`
+    h5.innerHTML = `${position["classType"]} ${position["courseNumber"]} (${getSemesterAsString(position)})`
     h5.className = 'card-header target'
     div.append(h5)
 }
