@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Information Form</title>
+    <link rel="icon" href="https://www.umkc.edu/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap">
-    <link rel="stylesheet" href="C:\Users\tcdel\Downloads\mainpage.css"> <!-- Replace with the path to your custom CSS file -->
+    <link rel="stylesheet" href="css.css"> 
+    
 	    <div class="container-fluid sd-top-header bg-umkc-blue header-blue-strips" id="header">
         <div class="row p-2">
         <div class="col-lg-6 align-self-center">
@@ -18,7 +20,7 @@
         <script>// <![CDATA[  // search bar
         var gcseDiv = document.getElementById('gcse-searchbox-only');
                                             gcseDiv.innerHTML = '<gcse:searchbox-only resultsUrl="/search.html"></gcse:searchbox-only>'
-        // ]]></script>
+       // ]]></script>
         <script>// <![CDATA[ 
         (function() {
                           var cx = '009448580219169355531:zaqt1kohfz5';
@@ -46,7 +48,7 @@
                 </div>
                 <div class="sd-header-text">
                     <h2 class="text-white text-md-left text-center"><span class="sd-site-header-subtext"></span><br>
-                    <a class="text-white" href="">Welcomes You!</a></h2>
+                    <a class="text-white" href="">Student Information Form</a></h2>
                 </div>
             </div>
         </div>
@@ -59,64 +61,264 @@
         <link href="https://www.umkc.edu/global-assets/css/global.css" rel="stylesheet">
         <title>UMKC Welcome</title>
 </head>
+
 <body>
-    <script type="module" src="create-account.js"></script>
-    <div class="container">
-        <div class="header sticky-top">
-            <img class="img-header" src="your-logo.png" alt="Logo">
-            <div class="header-title">
-                <h1>Student Information Form</h1>
-            </div>
-        </div>
-
-        <div class="container-title">
-            <h2 class="page-title">Student Information Form</h2>
-            <!--<button class="btn btn-apply" type="button">Apply Now</button>-->
-        </div>
-
-        <form method="post" id="submit-form" class="was-validated">
-            <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="first_name" required class="form-control">
-
-            <label for="last_name">Last Name:</label>
-            <input type="text" id="last_name" name="last_name" required class="form-control">
-
-            <label for="student_id">Student ID:</label>
-            <input type="text" id="student_id" name="student_id" required class="form-control">
-
-            <label for="umkc_email">UMKC Email:</label>
-            <input type="email" id="umkc_email" name="umkc_email" required class="form-control">
-
-            <label for="current_level">Current Level:</label>
-            <select id="current_level" name="current_level" class="form-select">
-                <option value="Bachelor of Science">Bachelor of Science</option>
-                <option value="Master of Science">Master of Science</option>
-                <option value="PhD">PhD</option>
-            </select><br>
-
-            <label for="graduating_semester">Graduating Semester:</label>
-            <input type="text" id="graduating_semester" name="graduating_semester" required class="form-control">
-
-            <label for="umkc_gpa">UMKC GPA:</label>
-            <input type="number" step="0.01" id="umkc_gpa" name="umkc_gpa" required class="form-control">
-
-            <label for="hours_completed">Hours Completed at UMKC:</label>
-            <input type="number" id="hours_completed" name="hours_completed" required class="form-control">
-
-            <label for="undergraduate_degree">Undergraduate Degree:</label>
-            <input type="text" id="undergraduate_degree" name="undergraduate_degree" required class="form-control">
-
-            <label for="current_major">Current Major:</label>
-            <input type="text" id="current_major" name="current_major" required class="form-control">
-
-            <label for="file_upload" class="file-label">File Upload:</label>
-            <div class="input-group file-input-group">
-                <input type="file" accept=".pdf" id="file_upload" name="file_upload" required class="form-control">
-                <!--<button class="btn btn-primary file-dropdown-toggle" type="button">Browse</button>-->
-            </div>
-
-            <button type="submit" class="btn btn-apply">Submit</button>
-        </form>
+    <div class="header">
+      <div>
+        <a id="logout" class="btn btn-apply float-end">Logout</a>
+      </div>
     </div>
-</body>
+    <div class="position-container">
+      <div class="row">
+        <div class="col-lg-11-auto">
+          <div class="card my-5 card-studentform">
+            <div class="card-body cardbody-color p-lg-5 studentform-card-body">
+              <form name="Form" id="application" action="javascript:modal()" accept-charset="UTF-8"
+                enctype="multipart/form-data" method="POST" onsubmit="" class="needs-validation" novalidate>
+                <div id="basics">
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="fname">First name:</label>
+                      <input class="form-control" type="text" id="fname" name="fname" required>
+                    </div>
+                    <div class="col">
+                      <label for="lname">Last name:</label>
+                      <input class="form-control" type="text" id="lname" name="lname" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="studentID">Student ID:</label>
+                      <input class="form-control" type="text" id="studentID" name="studentID" required>
+                    </div>
+                    <div class="col">
+                      <label for="email">UMKC Email:</label>
+                      <input class="form-control" type="email" id="email" name="email" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="undergraduatedegree">Undergraduate Degree (if applicable):</label>
+                      <input class="form-control" type="text" id="undergraduatedegree" name="undergraduatedegree">
+                    </div>
+                    <div class="col">
+                      <label for="GPA">UMKC Cumulative GPA:</label>
+                      <input class="form-control" type="number" onchange="gpaChange(this.value)" min="0" max="4" step="0.01" id="GPA" name="GPA" required>
+                      <div class="invalid-feedback" id="GPAmessage">
+                        Please enter your GPA.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="hours">Hours Completed at UMKC:</label>
+                      <input class="form-control" type="number" onchange="hoursChange(this.value)" min="0" id="hours" name="hours" required>
+                      <div class="invalid-feedback" id="hoursmessage">
+                        Please enter your completed hours.
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div id="gradterm">
+                        <label for='grad'>Graduating Semester:</label>
+                        <select required name='grad' id='grad' class="form-select">
+                          <option selected disabled value=''>Choose Term...</option>
+                          <option value='0'>Fall 2023</option>
+                        <option value='1'>Spring 2024</option>
+                        <option value='2'>Summer 2024</option>
+                        <option value='3'>Fall 2024</option>
+                    
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select your graduating semester.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div id="majordiv">
+                      <label class="form-label" for="major">Current Major:</label>
+                      <select required name="major" id="major" class="form-select">
+                        <option selected disabled value=''>Choose Major...</option>
+                        <option value='0'>Computer Science</option>
+                        <option value='1'>Information Technology</option>
+                        <option value='2'>Electrical Computer Engineering</option>
+                        <option value='3'>Electrical Engineering</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Please select your major.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label class="form-label" for="level">Current Level:</label><br>
+                    <div>
+                      <input class="form-check-input level" type="radio" required id="BS" name="level" value="0">
+                      <label class="form-check-label check-level" for="BS" id="BSlabel">BS</label>
+  
+                      <input class="form-check-input level" type="radio" required id="MS" name="level" value="1">
+                      <label class="form-check-label check-level" for="MS">MS</label>
+  
+                      <input class="form-check-input level" type="radio" required id="PhD" name="level" value="2">
+                      <label class="form-check-label check-level" for="PhD">PhD</label>
+                      <div class="invalid-feedback">
+                        Please select your current level.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <label class="form-label" for="applyterm">What term you are applying for?</label><br>
+                  <div>
+                    <input class="form-check-input applyterm" type="radio" required id="Fall" name="applyterm" value="0">
+                    <label class="form-check-label me-3" for="Fall">Fall</label>
+                    <input class="form-check-input applyterm" type="radio" required id="Spring" name="applyterm" value="1">
+                    <label class="form-check-label me-3" for="Spring">Spring</label>
+                    <input class="form-check-input applyterm" type="radio" required id="Summer" name="applyterm" value="2">
+                    <label class="form-check-label" for="Summer">Summer</label>
+                    <div class="invalid-feedback">
+                      Please select the term you are applying for.
+                    </div>
+                  </div>
+                </div><br>
+  
+                <div id="gta" class="col" hidden>
+                  <label class="form-label" for="GTA">Are you GTA certified or have a previous degree from a US institute (as this waives GTA certification)?</label>
+                  <div>
+                    <input class="form-check-input gtainput" type="radio" required id="yes" name="GTA" value="0" onclick="updateGTA(this.value)">
+                    <label class="form-check-label me-4" for="yes" id="BSlabel">Yes</label>
+  
+                    <input class="form-check-input gtainput" type="radio" required id="no" name="GTA" value="1" onclick="updateGTA(this.value)">
+                    <label class="form-check-label me-4" for="no">No</label> <br>
+  
+                    <input class="form-check-input gtainput" type="radio" required id="nolab" name="GTA" value="3" onclick="updateGTA(this.value)">
+                    <label class="form-check-label me-4" for="nolab">Not interested in being an Instructor</label>
+  
+                    <input type="radio" required id="null" value="3" name="GTA" hidden>
+                    <input type="radio" required id="onrecord" value="2" name="GTA" hidden>
+                    <input type="radio" required id="pending" value="4" name="GTA" hidden>
+                    <div class="invalid-feedback">
+                      Please select an Option.
+                    </div>
+                  </div>
+                </div><br>
+  
+                <div>
+                  <fieldset class="field_set">
+                    <legend id="courseslegend">Courses (select up to 5):</legend>
+                    <div id="graderlist" class="control-group course-form-control">
+                    </div>
+                    <div id="lablist" class="control-group course-form-control" hidden>
+                    </div>
+                    <div id="lablistna" class="control-group" hidden>
+                      <label class='form-label' for='lab'>Lab Classes</label>
+                      <p class="error">You must be GTA certified to work as a lab instructor. <a
+                          href="https://catalog.umkc.edu/general-graduate-academic-regulations-information/international-graduate-student-academic-regulations/"
+                          target="_blank">Click
+                          here</a> to learn more about GTA certification process.</p>
+                    </div>
+                    <div id="courseinput" class="input-group is-course-valid">
+                    </div>
+                    <div class="invalid-feedback">You must check at least one course.</div>
+                  </fieldset>
+                </div>
+  
+                <p id="uploadtext">You may attach your updated resume and transcript</p> <small class="text-muted">You can upload multiple documents using the dropdown arrow</small><br>
+  
+                <div class="input-group mb-3 col file-input-group">
+                  <i class="input-group-text bi bi-file-earmark"></i>
+                  <input class="form-control resumefile " type="file" id="rf" accept="application/pdf, image/png, image/jpeg" />
+                  <input hidden class="form-control transcriptfile" type="file" id="tf" accept="application/pdf, image/png, image/jpeg" />
+                  <input hidden class="form-control gtafile" type="file" id="gf" accept="application/pdf, image/png, image/jpeg" />
+  
+                  <label class="input-group-text resumefile file-label label-size" for="rf">Resume</label>
+                  <label hidden class="input-group-text transcriptfile file-label label-size" for="tf">Transcript</label>
+                  <label hidden class="input-group-text gtafile file-label label-size" for="gf">GTA</label>
+                  <div class="input-group-prepend">
+                    <button type="button"
+                      class="btn submit-btn dropdown-toggle dropdown-toggle-split file-dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu">
+                      <button type="button" onclick="changeUpload(this.value)" value="resumef"
+                        class="dropdown-item">Resume</button>
+                      <button type="button" onclick="changeUpload(this.value)" value="transcriptf"
+                        class="dropdown-item filedropdown">Transcript</button>
+                      <button type="button" onclick="changeUpload(this.value)" value="gtaf"
+                        class="dropdown-item filedropdown gtafilebtn">GTA certification or waiver</button>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback">
+                    You must upload proof of GTA certification or a waiver.
+                  </div>
+                </div>
+                <div class="text-center">
+                  <br><input type="submit" value="Submit" id="form-submit" class="btn submit-btn mt-3 px-5">
+                </div>
+              </form>
+              <!-- Message Form was submitted successfully-->
+              <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="formModalLabel">Application</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Your form was successfully submitted!
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="logout" class="btn btn-primary">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <script>
+      (function () {
+        'use strict'
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+      })()
+      function gpaChange(value) {
+        var message = "";
+        setTwoNumberDecimal();
+        if (value > 4)
+          message = "Value must be less than or equal to 4.";
+        else if (value < 0)
+          message = "Value must be greater than or equal to 0.";
+        else
+          message = "Please enter your GPA.";
+        $("#GPAmessage").html(message);
+      }
+      function hoursChange(value) {
+        var message = "";
+        if (value < 0)
+          message = "Value must be greater than or equal to 0.";
+        else
+          message = "Please enter your completed hours.";
+        $("#hoursmessage").html(message);
+      }
+    </script>
+  </body>
+
+
+
 </html>
