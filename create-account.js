@@ -38,7 +38,7 @@ window.onbeforeunload = function() {
 }
 
 window.addEventListener('load', function() {
-    document.getElementById('submit-form').addEventListener('submit', async function(event) {
+    document.getElementById('application').addEventListener('submit', async function(event) {
         event.preventDefault()
         let studentInfo = getAllStudentInformationFromPage()
 
