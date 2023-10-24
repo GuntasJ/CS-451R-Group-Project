@@ -78,32 +78,32 @@
                 <div id="basics">
                   <div class="row mb-3">
                     <div class="col">
-                      <label for="fname">First name:</label>
-                      <input class="form-control" type="text" id="fname" name="fname" required>
+                      <label for="first_name">First name:</label>
+                      <input class="form-control" type="text" id="first_name" name="first_name" required>
                     </div>
                     <div class="col">
-                      <label for="lname">Last name:</label>
-                      <input class="form-control" type="text" id="lname" name="lname" required>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="studentID">Student ID:</label>
-                      <input class="form-control" type="text" id="studentID" name="studentID" required>
-                    </div>
-                    <div class="col">
-                      <label for="email">UMKC Email:</label>
-                      <input class="form-control" type="email" id="email" name="email" required>
+                      <label for="last_name">Last name:</label>
+                      <input class="form-control" type="text" id="last_name" name="last_name" required>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col">
-                      <label for="undergraduatedegree">Undergraduate Degree (if applicable):</label>
-                      <input class="form-control" type="text" id="undergraduatedegree" name="undergraduatedegree">
+                      <label for="student_id">Student ID:</label>
+                      <input class="form-control" type="text" id="student_id" name="student_id" required>
                     </div>
                     <div class="col">
-                      <label for="GPA">UMKC Cumulative GPA:</label>
-                      <input class="form-control" type="number" onchange="gpaChange(this.value)" min="0" max="4" step="0.01" id="GPA" name="GPA" required>
+                      <label for="umkc_email">UMKC Email:</label>
+                      <input class="form-control" type="email" id="umkc_email" name="umkc_email" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="current_level">Undergraduate Degree (if applicable):</label>
+                      <input class="form-control" type="text" id="current_level" name="current_level">
+                    </div>
+                    <div class="col">
+                      <label for="umkc_gpa">UMKC Cumulative GPA:</label>
+                      <input class="form-control" type="number" onchange="gpaChange(this.value)" min="0" max="4" step="0.01" id="umkc_gpa" name="umkc_gpa" required>
                       <div class="invalid-feedback" id="GPAmessage">
                         Please enter your GPA.
                       </div>
@@ -111,16 +111,16 @@
                   </div>
                   <div class="row mb-3">
                     <div class="col">
-                      <label for="hours">Hours Completed at UMKC:</label>
-                      <input class="form-control" type="number" onchange="hoursChange(this.value)" min="0" id="hours" name="hours" required>
+                      <label for="hours_completed">Hours Completed at UMKC:</label>
+                      <input class="form-control" type="number" onchange="hoursChange(this.value)" min="0" id="hours_completed" name="hours_completed" required>
                       <div class="invalid-feedback" id="hoursmessage">
                         Please enter your completed hours.
                       </div>
                     </div>
                     <div class="col">
                       <div id="gradterm">
-                        <label for='grad'>Graduating Semester:</label>
-                        <select required name='grad' id='grad' class="form-select">
+                        <label for='graduating_semester'>Graduating Semester:</label>
+                        <select required name='graduating_semester' id='graduating_semester' class="form-select">
                           <option selected disabled value=''>Choose Term...</option>
                           <option value='0'>Fall 2023</option>
                         <option value='1'>Spring 2024</option>
@@ -138,8 +138,8 @@
                 <div class="row mb-3">
                   <div class="col">
                     <div id="majordiv">
-                      <label class="form-label" for="major">Current Major:</label>
-                      <select required name="major" id="major" class="form-select">
+                      <label class="form-label" for="current_major">Current Major:</label>
+                      <select required name="current_major" id="current_major" class="form-select">
                         <option selected disabled value=''>Choose Major...</option>
                         <option value='0'>Computer Science</option>
                         <option value='1'>Information Technology</option>
