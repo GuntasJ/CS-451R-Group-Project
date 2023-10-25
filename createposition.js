@@ -2,9 +2,8 @@ import { getAllPositions, updatePosition, addNewPosition, deletePosition } from 
 
 //Returns an array object holding position information. 
 function getAllPositionInfoFromPage() {
-    let positionClassType = document.getElementById("CourseType").value
-    let positionCourseNumber = document.getElementById("CourseNumber").value
-    let poitionDegree = document.getElementById("level").value
+    let positionClass = document.getElementById("CourseType").value
+    let positionDegree = document.getElementById("level").value
     let positionSemester = []
 
     if(document.getElementById("checkbox_0").checked) {
@@ -18,19 +17,18 @@ function getAllPositionInfoFromPage() {
     }
 
     let positionType = document.getElementById("position").value
-    let positionsNotes = document.getElementById("notes").value
+    let positionNotes = document.getElementById("notes").value
 
-    return [positionClassType, positionCourseNumber, poitionDegree, positionSemester, positionType, positionsNotes]
+    return [positionClass, positionDegree, positionSemester, positionType, positionNotes]
 }
 
 function createPositionObjectFromArrayWithoutId(positionInfo) {
     return {
-        classType: positionInfo[0],
-        courseNumber: positionInfo[1],
-        degree: positionInfo[2],
-        semester: positionInfo[3],
-        positionType: positionInfo[4],
-        notes: positionInfo[5]
+        positionClass: positionInfo[0],
+        degree: positionInfo[1],
+        semester: positionInfo[2],
+        positionType: positionInfo[3],
+        notes: positionInfo[4]
     }
 }
 

@@ -46,6 +46,14 @@ export async function updateStudent(id, student) {
     return data
 }
 
+export async function updateStudentStatus(id, status) {
+    const response = await fetch(`${baseApiPath}/students/${id}/${status}`, {
+        method: 'PUT',
+    })
+    const data = await response.json()
+    return data
+}
+
 export async function deleteStudent(id) {
     fetch(`${baseApiPath}/students/${id}`, {
         method: 'DELETE'
