@@ -34,10 +34,11 @@ function createPositionObjectFromArrayWithoutId(positionInfo) {
 
 window.addEventListener('load', function() {
     //getAllPositions().then(data => console.log(data))
-    document.getElementById("courseform").addEventListener('submit',async function() {
+    document.getElementById("courseform").addEventListener('submit', async function(e) {
+        e.preventDefault()
         let positionInfo = getAllPositionInfoFromPage()
         console.log("creating position")
         await addNewPosition(createPositionObjectFromArrayWithoutId(positionInfo))
-        location.href = "admin.html"
+        //location.href = "admin.html"
     })
 })

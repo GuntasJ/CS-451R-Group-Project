@@ -18,51 +18,35 @@ function getSemesterAsString(position) {
 }
 
 function displayPosition(position) {
-    let div = document.getElementById("card")
-    let h5 = document.createElement('h5')
+    let a = document.getElementById("title")
+    let h5 = document.createElement("h5")
+    let span1 = document.createElement("span")
+    let span2 = document.createElement("span")
+    let span3 = document.createElement("span")
 
-    let span1 = document.createElement('span')
-    let span2 = document.createElement('span')
-    
-    span1.innerHTML = `${position["positionClass"]} (${getSemesterAsString(position)})`
+    let positionClass = document.createTextNode(position["positionClass"])
+    let leftParenthesis = document.createTextNode("(")
+    let positionSemester = document.createTextNode(getSemesterAsString(position))
+    let rightParenthesis = document.createTextNode(")")
+    let applicantCount = document.createTextNode(`${position["applicants"].length} Applicants`)
 
-    h5.className = 'card-header target'
-    span2.className = "float-end right-card-title"
+	h5.setAttribute("class","card-header target");
+	span1.setAttribute("id", `classname_${position["positionClass"]}`);
+	span2.setAttribute("id",`${position["positionClass"]}_semester`);
+	span3.setAttribute("class","float-end right-card-title");
+	span3.setAttribute("id",`${position["positionClass"]}_applicants`);
 
+    a.appendChild(h5)
     h5.appendChild(span1)
+    span1.appendChild(positionClass)
+    h5.appendChild(leftParenthesis)
     h5.appendChild(span2)
-    h5.innerHTML = 
-    div.append(h5)
-    
-    /*
-    //Create Elements
-	var element_1 = document.createElement("h5");
-	var element_1_1 = document.createElement("span");
-	var element_1_2 = document.createElement("span");
-	var element_1_3 = document.createElement("span");
-	//Create Text Nodes
-	var textNode_1_1_1 = document.createTextNode("IT 451R");
-	var textNode_1_1 = document.createTextNode("(");
-	var textNode_1_2_1 = document.createTextNode("Fall/Spring");
-	var textNode_1_2 = document.createTextNode(")");
-	var textNode_1_3_1 = document.createTextNode("0 Applicants");
-	//Set Attributes
-	element_1.setAttribute("class","card-header target");
-	element_1_1.setAttribute("id","classname");
-	element_1_2.setAttribute("id","semester");
-	element_1_3.setAttribute("class","float-end right-card-title");
-	element_1_3.setAttribute("id","applicants");
-	//Append Children
-	element.appendChild(element_1);
-	element_1.appendChild(element_1_1);
-	element_1_1.appendChild(textNode_1_1_1);
-	element_1.appendChild(textNode_1_1);
-	element_1.appendChild(element_1_2);
-	element_1_2.appendChild(textNode_1_2_1);
-	element_1.appendChild(textNode_1_2);
-	element_1.appendChild(element_1_3);
-	element_1_3.appendChild(textNode_1_3_1);
-    */
+    span2.appendChild(positionSemester)
+    h5.appendChild(rightParenthesis)
+    h5.appendChild(span3)
+    span3.appendChild(applicantCount)
+
+
 
 }
 window.onload = function() {

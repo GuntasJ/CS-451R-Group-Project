@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
-    <script type="text/javascript" src="create-account.js"></script>
+    <script type="module" src="create-account.js"></script>
     <script type="text/javascript" src="checklist.js"></script>
     
 	    <div class="container-fluid sd-top-header bg-umkc-blue header-blue-strips" id="header">
@@ -105,8 +105,8 @@
                   </div>
                   <div class="row mb-3">
                     <div class="col">
-                      <label for="current_level">Undergraduate Degree (if applicable):</label>
-                      <input class="form-control" type="text" id="current_level" name="current_level">
+                      <label for="undergraduate_degree">Undergraduate Degree (if applicable):</label>
+                      <input class="form-control" type="text" id="undergraduate_degree" name="undergraduate_degree">
                     </div>
                     <div class="col">
                       <label for="umkc_gpa">UMKC Cumulative GPA:</label>
@@ -129,11 +129,10 @@
                         <label for='graduating_semester'>Graduating Semester:</label>
                         <select required name='graduating_semester' id='graduating_semester' class="form-select">
                           <option selected disabled value=''>Choose Term...</option>
-                          <option value='0'>Fall 2023</option>
-                        <option value='1'>Spring 2024</option>
-                        <option value='2'>Summer 2024</option>
-                        <option value='3'>Fall 2024</option>
-                    
+                          <option value='Fall 2023'>Fall 2023</option>
+                          <option value='Spring 2024'>Spring 2024</option>
+                          <option value='Summer 2024'>Summer 2024</option>
+                          <option value='Fall 2024'>Fall 2024</option>
                         </select>
                         <div class="invalid-feedback">
                           Please select your graduating semester.
@@ -148,10 +147,10 @@
                       <label class="form-label" for="current_major">Current Major:</label>
                       <select required name="current_major" id="current_major" class="form-select">
                         <option selected disabled value=''>Choose Major...</option>
-                        <option value='0'>Computer Science</option>
-                        <option value='1'>Information Technology</option>
-                        <option value='2'>Electrical Computer Engineering</option>
-                        <option value='3'>Electrical Engineering</option>
+                        <option value='Computer Science'>Computer Science</option>
+                        <option value='Information Technology'>Information Technology</option>
+                        <option value='Electrical Computer Engineering'>Electrical Computer Engineering</option>
+                        <option value='Electrical Engineering'>Electrical Engineering</option>
                       </select>
                       <div class="invalid-feedback">
                         Please select your major.
@@ -161,13 +160,13 @@
                   <div class="col">
                     <label class="form-label" for="level">Current Level:</label><br>
                     <div>
-                      <input class="form-check-input level" type="radio" required id="BS" name="level" value="0">
+                      <input class="form-check-input level" type="radio" required id="BS" name="level" value="BS">
                       <label class="form-check-label check-level" for="BS" id="BSlabel">BS</label>
   
-                      <input class="form-check-input level" type="radio" required id="MS" name="level" value="1">
+                      <input class="form-check-input level" type="radio" required id="MS" name="level" value="MS">
                       <label class="form-check-label check-level" for="MS">MS</label>
   
-                      <input class="form-check-input level" type="radio" required id="PhD" name="level" value="2">
+                      <input class="form-check-input level" type="radio" required id="PhD" name="level" value="PhD">
                       <label class="form-check-label check-level" for="PhD">PhD</label>
                       <div class="invalid-feedback">
                         Please select your current level.
@@ -227,9 +226,9 @@
                 
                 </div>
                   -->
-            <h>Courses : Select 5 courses</h>
-            <br>
-                  <select name="UMKC classes" multiple multislect-search="true">
+                <h>Courses : Select 5 courses</h>
+                <br>
+                  <select id = "umkc_classes" name="UMKC classes" multiple multislect-search="true">
                     <option>CS 101</option>
                     <option>CS 191</option>
                     <option>CS 201R</option>
@@ -278,19 +277,19 @@
                     <option>IT 222</option>
                     <option>IT 321</option>
                   </select>
-    <br>
+              <br>
                 <p id="uploadtext">You may attach your updated resume and transcript</p> <small class="text-muted">You can upload multiple documents using the dropdown arrow</small><br>
   
                 <div class="input-group mb-3 col file-input-group">
                   <i class="input-group-text bi bi-file-earmark"></i>
-                  <input class="form-control resumefile " type="file" id="rf" accept="application/pdf, image/png, image/jpeg" />
-                  <input hidden class="form-control transcriptfile" type="file" id="tf" accept="application/pdf, image/png, image/jpeg" />
-                  <input hidden class="form-control gtafile" type="file" id="gf" accept="application/pdf, image/png, image/jpeg" />
+                  <input class="form-control resumefile " type="file" id="file_upload" accept="application/pdf" />
+                  <!-- <input hidden class="form-control transcriptfile" type="file" id="tf" accept="application/pdf, image/png, image/jpeg" />
+                  <input hidden class="form-control gtafile" type="file" id="gf" accept="application/pdf, image/png, image/jpeg" /> -->
   
-                  <label class="input-group-text resumefile file-label label-size" for="rf">Resume</label>
-                  <label hidden class="input-group-text transcriptfile file-label label-size" for="tf">Transcript</label>
-                  <label hidden class="input-group-text gtafile file-label label-size" for="gf">GTA</label>
-                  <div class="input-group-prepend">
+                  <label class="input-group-text resumefile file-label label-size" for="file_upload">File Upload</label>
+                  <!-- <label hidden class="input-group-text transcriptfile file-label label-size" for="tf">Transcript</label>
+                  <label hidden class="input-group-text gtafile file-label label-size" for="gf">GTA</label> -->
+                  <!-- <div class="input-group-prepend">
                     <button type="button"
                       class="btn submit-btn dropdown-toggle dropdown-toggle-split file-dropdown-toggle"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -306,7 +305,7 @@
                   </div>
                   <div class="invalid-feedback">
                     You must upload proof of GTA certification or a waiver.
-                  </div>
+                  </div> -->
                 </div>
                 <div class="text-center">
                   <br><input type="submit" value="Submit" id="form-submit" class="btn submit-btn mt-3 px-5">

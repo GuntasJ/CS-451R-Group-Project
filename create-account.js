@@ -1,20 +1,27 @@
-import { addNewStudent, addNewStudentWithFile, uploadFile } from "./restapi.js"
+import {addNewStudentWithFile, uploadFile } from "./restapi.js"
 
 function getAllStudentInformationFromPage() {
     let firstName = document.getElementById('first_name').value
     let lastName = document.getElementById('last_name').value
     let studentId = parseInt(document.getElementById('student_id').value)
     let umkcEmail = document.getElementById('umkc_email').value
-    let currentLevel = document.getElementById('current_level').value
+    let currentLevel = document.querySelector('input[name="level"]:checked').value
+
     let graduatingSemester = document.getElementById('graduating_semester').value
     let umkcGPA = parseFloat(document.getElementById('umkc_gpa').value)
     let hoursUMKC = parseInt(document.getElementById('hours_completed').value)
     let degree = document.getElementById('undergraduate_degree').value
     let currentMajor = document.getElementById('current_major').value
 
+    let dropDownBox = document.getElementById('umkc_classes')
+    let classes = Array.from(dropDownBox.options)
+                    .filter((option) => option.selected)
+                    .map((option) => option.value)
+    
+
     return [
         firstName, lastName, studentId, umkcEmail, currentLevel, 
-        graduatingSemester, umkcGPA, hoursUMKC, degree, currentMajor
+        graduatingSemester, umkcGPA, hoursUMKC, degree, currentMajor, classes
     ]
 } 
 
@@ -29,7 +36,8 @@ function createStudentObjectFromArrayWithoutId(studentInfo) {
         umkcGPA: studentInfo[6],
         hoursDoneAtUmkc: studentInfo[7],
         undergraduateDegree: studentInfo[8],
-        currentMajor: studentInfo[9]
+        currentMajor: studentInfo[9],
+        classes: studentInfo[10]
     }
 }
 
