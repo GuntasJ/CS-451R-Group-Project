@@ -39,6 +39,6 @@ window.addEventListener('load', function() {
         let positionInfo = getAllPositionInfoFromPage()
         console.log("creating position")
         await addNewPosition(createPositionObjectFromArrayWithoutId(positionInfo))
-        //location.href = "admin.html"
+        location.href = "admin.html"
     })
 })

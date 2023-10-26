@@ -23,26 +23,36 @@ function displayPosition(position) {
     let span1 = document.createElement("span")
     let span2 = document.createElement("span")
     let span3 = document.createElement("span")
+    let span4 = document.createElement("span")
 
     let positionClass = document.createTextNode(position["positionClass"])
     let leftParenthesis = document.createTextNode("(")
     let positionSemester = document.createTextNode(getSemesterAsString(position))
     let rightParenthesis = document.createTextNode(")")
+    let standingRequired = document.createTextNode(`: ${position["degree"]}`)
     let applicantCount = document.createTextNode(`${position["applicants"].length} Applicants`)
 
 	h5.setAttribute("class","card-header target");
-	span1.setAttribute("id", `classname_${position["positionClass"]}`);
-	span2.setAttribute("id",`${position["positionClass"]}_semester`);
-	span3.setAttribute("class","float-end right-card-title");
-	span3.setAttribute("id",`${position["positionClass"]}_applicants`);
+	span1.setAttribute("id", `${position["id"]}_${position["positionClass"]}_class`)
+	span2.setAttribute("id", `${position["id"]}_${position["positionClass"]}_semester`)
+	span3.setAttribute("class","float-end right-card-title")
+	span3.setAttribute("id", `${position["id"]}_${position["positionClass"]}_applicants`)
+    span4.setAttribute("id", `${position["id"]}_${position["positionClass"]}_degree`)
 
     a.appendChild(h5)
+
     h5.appendChild(span1)
     span1.appendChild(positionClass)
+
     h5.appendChild(leftParenthesis)
     h5.appendChild(span2)
     span2.appendChild(positionSemester)
+
     h5.appendChild(rightParenthesis)
+
+    h5.appendChild(span4)
+    span4.appendChild(standingRequired)
+
     h5.appendChild(span3)
     span3.appendChild(applicantCount)
 
