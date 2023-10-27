@@ -5,8 +5,7 @@ function getAllStudentInformationFromPage() {
     let lastName = document.getElementById('last_name').value
     let studentId = parseInt(document.getElementById('student_id').value)
     let umkcEmail = document.getElementById('umkc_email').value
-    let currentLevel = document.querySelector('input[name="level"]:checked').value
-
+    let standing = document.querySelector('input[name="level"]:checked').value
     let graduatingSemester = document.getElementById('graduating_semester').value
     let umkcGPA = parseFloat(document.getElementById('umkc_gpa').value)
     let hoursUMKC = parseInt(document.getElementById('hours_completed').value)
@@ -20,7 +19,7 @@ function getAllStudentInformationFromPage() {
     
 
     return [
-        firstName, lastName, studentId, umkcEmail, currentLevel, 
+        firstName, lastName, studentId, umkcEmail, standing, 
         graduatingSemester, umkcGPA, hoursUMKC, degree, currentMajor, classes
     ]
 } 
@@ -31,7 +30,7 @@ function createStudentObjectFromArrayWithoutId(studentInfo) {
         lastName: studentInfo[1],
         studentId: studentInfo[2],
         umkcEmail: studentInfo[3],
-        currentLevel: studentInfo[4],
+        standing: studentInfo[4],
         graduatingSemester: studentInfo[5],
         umkcGPA: studentInfo[6],
         hoursDoneAtUmkc: studentInfo[7],
@@ -61,7 +60,7 @@ window.addEventListener('load', function() {
         let response1 = await addNewStudentWithFile(createStudentObjectFromArrayWithoutId(studentInfo), fileId)
         console.log(response1)
 
-        location.reload()
+        //location.reload()
     })
    
 })
