@@ -26,7 +26,7 @@ async function addStudentRows() {
         cell1.innerHTML = studentList[i]["studentId"]
         cell2.innerHTML = studentList[i]["firstName"] + " " + studentList[i]["lastName"]
         cell3.innerHTML = studentList[i]["umkcEmail"]
-        cell4.innerHTML = studentList[i]["currentLevel"]
+        cell4.innerHTML = studentList[i]["standing"]
         cell5.innerHTML = studentList[i]["currentMajor"]
         cell6.innerHTML = studentList[i]["umkcGPA"]
         cell7.innerHTML = studentList[i]["hoursDoneAtUmkc"]
