@@ -36,6 +36,9 @@ function displayPosition(position) {
     let notesDiv = document.createElement("div")
     let notesSpan = document.createElement("span")
 
+    let applicantButtonA = document.createElement("a")
+
+
     let positionClass = document.createTextNode(position["positionClass"])
     let leftParenthesis = document.createTextNode(" (")
     let positionSemester = document.createTextNode(getSemesterAsString(position))
@@ -47,6 +50,13 @@ function displayPosition(position) {
     let noteLabelText = document.createTextNode("Notes: ")
     let noteSpanText = document.createTextNode(`${position["notes"]}`)
 
+    let applicantButtonAText = document.createTextNode("See Applicants")
+
+    applicantButtonA.setAttribute("id", `seebutton_${position["id"]}`)
+    applicantButtonA.setAttribute("href", "")
+    applicantButtonA.setAttribute("value", "")
+    applicantButtonA.setAttribute("class", "mt-2 btn open-position-btn btn-card")
+    applicantButtonA.setAttribute("style", "height:50px; line-height:35px;")
 
     notesLabel.setAttribute("class", "card-title float-start")
     positionLabel.setAttribute("class", "card-title mt-2 mb-3")
@@ -73,10 +83,13 @@ function displayPosition(position) {
     span4.setAttribute("id", `${position["id"]}_${position["positionClass"]}_degree`)
 
     /*
-    <label class="card-title float-start">Notes: </label>
-                    <div class="notes-wrapper admin-notes">
-                        <span id="notes">None</span>
+                    <a id="seebutton" href="" value="" class="mt-2 btn open-position-btn btn-card"
+                        style="height:50px; line-height:35px;">See Applicants</a>
+                    <div class="mt-2 open-position-input-group input-group float-end">
+                        <a id="editbutton" href="" value="" class="input-group-btn btn btn-card">Edit Notes</a>
+                        <button id="closebutton" value="" class="input-group-btn btn btn-card">Close Position</button>
                     </div>
+                    <br>
                     */
 
     positionLabel.appendChild(positionLabelText)
@@ -84,12 +97,18 @@ function displayPosition(position) {
     positionLabel.appendChild(graderSpan)
     collapseDiv.appendChild(positionLabel)
     collapseDiv.appendChild(br)
+
     notesLabel.appendChild(noteLabelText)
     collapseDiv.appendChild(notesLabel)
 
     notesDiv.appendChild(notesSpan)
     notesSpan.appendChild(noteSpanText)
     collapseDiv.appendChild(notesDiv)
+
+    applicantButtonA.appendChild(applicantButtonAText)
+    collapseDiv.appendChild(applicantButtonA)
+
+
 
 
     mainDiv.appendChild(div)
