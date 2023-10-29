@@ -82,4 +82,52 @@ h30 {
     font-family: Oswald,sans-serif;
     text-align: center;
 }
+body {
+    background-color: whitesmoke;
+    color: #044c7c;
+}
 
+.container {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    background-color: white;
+}
+
+table.dataTable {
+    clear: both;
+    margin-top: none !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    /* border-collapse: separate !important; */
+    border-spacing: 0;
+}
+
+.btn-apply {
+    background-color: #FFdd00;
+    border-color: #FFdd00;
+    color: #044c7c;
+    margin-right: 25px;
+    width: max-content;
+    font-weight: bolder;
+}
+
+.btn-apply:hover {
+    background-color: #044c7c;
+    color: #FFdd00;
+    box-shadow: 3px 3px 3px #FFdd00;
+}
+
+.submit-btn{
+  color: white;
+  background-color: #0066cc;
+  font-weight: bolder;
+}
+
+.submit-btn:hover{
+background-color: #FFdd00;
+border-color: #FFdd00;
+color:#0066cc;
+font-weight: bolder;
+}
+.pad{
+    padding-right: 2rem!important;
+}
