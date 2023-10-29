@@ -110,32 +110,32 @@ footer {
   }
 
   /* Style the video container */
-/* .video-container {
+ .video-container {
     max-width: 100%;
     position: relative;
   }
-   */
+   
   /* Style the video itself */
-  /* video {
+   video {
     width: 100%;
     height: auto;
   } */
   
   /* Add some padding or margins if needed */
-  /* .video-container {
+   .video-container {
     margin: 20px;
   }
-   */
+   
   /* Add a border or box shadow if desired */
   video {
     border: 1px solid #ccc;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   }
-/* 
-  video{
+
+   video{
     max-width: 100%;
     height: auto;
-  } */
+  } 
 
   .bgvid-bottom bgvid--show {
     --hero-height: 690px;
