@@ -72,9 +72,11 @@
 <body>
     <div class="header">
         <!-- <script type="module" src="create-account.js"></script> -->
-      <div>
-      </div>
     </div>
+    <br>
+    <div>
+      <a id="logout"  href="../main_pages/UMKC Main.html" class="btn btn-apply float-end">Logout</a>
+  </div>
     <div class="position-container">
       <div class="row">
         <div class="col-lg-11-auto">
@@ -158,18 +160,16 @@
                     </div>
                   </div>
                   <div class="col">
-                    <label class="form-label" for="level">Current Level:</label><br>
-                    <div>
-                      <input class="form-check-input level" type="radio" required id="BS" name="level" value="BS">
-                      <label class="form-check-label check-level" for="BS" id="BSlabel">BS</label>
-  
-                      <input class="form-check-input level" type="radio" required id="MS" name="level" value="MS">
-                      <label class="form-check-label check-level" for="MS">MS</label>
-  
-                      <input class="form-check-input level" type="radio" required id="PhD" name="level" value="PhD">
-                      <label class="form-check-label check-level" for="PhD">PhD</label>
+                    <div id="gradterm">
+                      <label for='graduating_semester'>Current Level:</label>
+                      <select required name='graduating_semester' id='graduating_semester' class="form-select">
+                        <option selected disabled value=''>Choose one:</option>
+                        <option value='Fall 2023'>BS</option>
+                        <option value='Spring 2024'>MS</option>
+                        <option value='Summer 2024'>PhD</option>
+                      </select>
                       <div class="invalid-feedback">
-                        Please select your current level.
+                        Please select your graduating semester.
                       </div>
                     </div>
                   </div>
