@@ -1,9 +1,9 @@
-import { getAllPositions, updatePosition, addNewPosition, deletePosition } from "./restapi.js";
+import { addNewPosition } from "./restapi.js";
 
 //Returns an array object holding position information. 
 function getAllPositionInfoFromPage() {
     let positionClass = document.getElementById("CourseType").value
-    let positionDegree = document.getElementById("level").value
+    let requiredStanding = document.getElementById("level").value
     let positionSemester = []
 
     if(document.getElementById("checkbox_0").checked) {
@@ -19,13 +19,13 @@ function getAllPositionInfoFromPage() {
     let positionType = document.getElementById("position").value
     let positionNotes = document.getElementById("notes").value
 
-    return [positionClass, positionDegree, positionSemester, positionType, positionNotes]
+    return [positionClass, requiredStanding, positionSemester, positionType, positionNotes]
 }
 
 function createPositionObjectFromArrayWithoutId(positionInfo) {
     return {
         positionClass: positionInfo[0],
-        degree: positionInfo[1],
+        requiredStanding: positionInfo[1],
         semester: positionInfo[2],
         positionType: positionInfo[3],
         notes: positionInfo[4]
@@ -38,7 +38,12 @@ window.addEventListener('load', function() {
         e.preventDefault()
         let positionInfo = getAllPositionInfoFromPage()
         console.log("creating position")
-        await addNewPosition(createPositionObjectFromArrayWithoutId(positionInfo))
-        location.href = "admin.html"
+        const response = await addNewPosition(createPositionObjectFromArrayWithoutId(positionInfo))
+        if(!response.ok) {
+            alert(`The position with class name ${positionInfo[0]} and position type ${positionInfo[3]} already exists!`)
+        }
+        else {
+            location.href = "admin.html"
+        }
     })
 })

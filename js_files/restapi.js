@@ -4,61 +4,61 @@ const baseApiPath = 'http://localhost:8080/tags/api/v1'
 
 //This is the code that is used for all the requests
 
-export async function getAllStudents() {
-    const response = await fetch(`${baseApiPath}/students`)
-    const data = await response.json()
-    return data
-}
+// export async function getAllStudents() {
+//     const response = await fetch(`${baseApiPath}/students`)
+//     const data = await response.json()
+//     return data
+// }
 
-export async function addNewStudent(student) {
-    const response = await fetch(`${baseApiPath}/students`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(student)
-    })
-    const data = await response.json()
-    return data
-}
+// export async function addNewStudent(student) {
+//     const response = await fetch(`${baseApiPath}/students`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(student)
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
-export async function addNewStudentWithFile(student, fileId) {
-    const response = await fetch(`${baseApiPath}/students?file_id=${fileId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(student)
-    })
-    const data = await response.json()
-    return data
-}
+// export async function addNewStudentWithFile(student, fileId) {
+//     const response = await fetch(`${baseApiPath}/students?file_id=${fileId}`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(student)
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
-export async function updateStudent(id, student) {
-    const response = await fetch(`${baseApiPath}/students/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(student)
-    })
-    const data = await response.json()
-    return data
-}
+// export async function updateStudent(id, student) {
+//     const response = await fetch(`${baseApiPath}/students/${id}`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(student)
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
-export async function updateStudentStatus(id, status) {
-    const response = await fetch(`${baseApiPath}/students/${id}/${status}`, {
-        method: 'PUT',
-    })
-    const data = await response.json()
-    return data
-}
+// export async function updateStudentStatus(id, status) {
+//     const response = await fetch(`${baseApiPath}/students/${id}/${status}`, {
+//         method: 'PUT',
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
-export async function deleteStudent(id) {
-    fetch(`${baseApiPath}/students/${id}`, {
-        method: 'DELETE'
-    })
-}
+// export async function deleteStudent(id) {
+//     fetch(`${baseApiPath}/students/${id}`, {
+//         method: 'DELETE'
+//     })
+// }
 
 //Positions API
 
@@ -76,27 +76,26 @@ export async function addNewPosition(position) {
         },
         body: JSON.stringify(position)
     })
-    const data = await response.json()
-    return data
+    return response;
 }
 
-export async function updatePosition(id, position) {
-    const response = await fetch(`${baseApiPath}/positions/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(position)
-    })
-    const data = await response.json()
-    return data
-}
+// export async function updatePosition(id, position) {
+//     const response = await fetch(`${baseApiPath}/positions/${id}`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(position)
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
-export async function deletePosition(id) {
-    fetch(`${baseApiPath}/positions/${id}`, {
-        method: 'DELETE'
-    })
-}
+// export async function deletePosition(id) {
+//     fetch(`${baseApiPath}/positions/${id}`, {
+//         method: 'DELETE'
+//     })
+// }
 
 //Admin API
 
@@ -136,25 +135,25 @@ export async function deleteApplication() {
 
 //file transfer
 
-export async function getAllFiles() {
-    const response = await fetch(`${baseApiPath}/files`)
-    const data = await response.json()
-    return data
-}
+// export async function getAllFiles() {
+//     const response = await fetch(`${baseApiPath}/files`)
+//     const data = await response.json()
+//     return data
+// }
 
-export async function uploadFile(formData) {
-    const response = await fetch(`${baseApiPath}/files`, {
-        method: 'POST',
-        body: formData
-    })
-    const data = await response.json()
-    return data
-}
+// export async function uploadFile(formData) {
+//     const response = await fetch(`${baseApiPath}/files`, {
+//         method: 'POST',
+//         body: formData
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
-export async function updateFile() {
+// export async function updateFile() {
 
-}
+// }
 
-export async function deleteFile() {
+// export async function deleteFile() {
 
-}
+// }
