@@ -32,6 +32,8 @@ function createPositionObjectFromArrayWithoutId(positionInfo) {
     }
 }
 
+
+
 window.addEventListener('load', function() {
     //getAllPositions().then(data => console.log(data))
     document.getElementById("courseform").addEventListener('submit', async function(e) {
@@ -41,6 +43,7 @@ window.addEventListener('load', function() {
         const response = await addNewPosition(createPositionObjectFromArrayWithoutId(positionInfo))
         if(!response.ok) {
             alert(`The position with class name ${positionInfo[0]} and position type ${positionInfo[3]} already exists!`)
+            location.reload()
         }
         else {
             location.href = "admin.html"
