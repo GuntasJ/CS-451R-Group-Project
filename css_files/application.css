@@ -131,3 +131,9 @@ font-weight: bolder;
 .pad{
     padding-right: 2rem!important;
 }
+
+p5{
+    color:black; 
+    font-size: 19px;
+    margin-bottom: 20px;
+}
