@@ -1,0 +1,38 @@
+/* Styling for the registration form */
+.umkc-register-form {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.umkc-register-form h1 {
+    color: #002D72; /* UMKC blue color */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.umkc-register-form label {
+    display: block;
+    text-align: left;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.umkc-register-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.umkc-register-form button {
+    background-color: #002D72; /* UMKC blue color */
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.umkc-register-form button:hover {
+    background-color: #0056B3; /* Hover color */
+}
