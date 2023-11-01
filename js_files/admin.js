@@ -17,6 +17,13 @@ function getSemesterAsString(position) {
     return semesterString.slice(0, -1)
 }
 
+function cleanId(positionClass, positionType) {
+    console.log(positionClass)
+    console.log(positionType)
+    console.log(positionClass.split(" ").join(''))
+    return (positionClass.split(" ").join('') + "_" + positionType);
+}
+
 function displayPosition(position) {
     let mainDiv = document.getElementById("sample")
     let div = document.createElement("div")
@@ -38,12 +45,13 @@ function displayPosition(position) {
 
     let applicantButtonA = document.createElement("a")
 
+    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
 
     let positionClass = document.createTextNode(position["positionClass"])
     let leftParenthesis = document.createTextNode(" (")
     let positionSemester = document.createTextNode(getSemesterAsString(position))
     let rightParenthesis = document.createTextNode(")")
-    let standingRequired = document.createTextNode(`: ${position["degree"]}`)
+    let standingRequired = document.createTextNode(`: ${position["requiredStanding"]}`)
     let applicantCount = document.createTextNode(`${position["applicants"].length} Applicants`)
     let positionLabelText = document.createTextNode("Position: ")
     let graderSpanText = document.createTextNode(`${position["positionType"]}`)
@@ -52,7 +60,7 @@ function displayPosition(position) {
 
     let applicantButtonAText = document.createTextNode("See Applicants")
 
-    applicantButtonA.setAttribute("id", `seebutton_${position["id"]}`)
+    applicantButtonA.setAttribute("id", `seebutton_${cleanPositionId}`)
     applicantButtonA.setAttribute("href", "")
     applicantButtonA.setAttribute("value", "")
     applicantButtonA.setAttribute("class", "mt-2 btn open-position-btn btn-card")
@@ -60,27 +68,27 @@ function displayPosition(position) {
 
     notesLabel.setAttribute("class", "card-title float-start")
     positionLabel.setAttribute("class", "card-title mt-2 mb-3")
-    graderSpan.setAttribute("id", `position_${position["id"]}`)
+    graderSpan.setAttribute("id", `position_${cleanPositionId}`)
 
     notesDiv.setAttribute("class", "notes-wrapper admin-notes")
-    notesSpan.setAttribute("id", `notes_${position["id"]}`)
+    notesSpan.setAttribute("id", `notes_${cleanPositionId}`)
     
     div.setAttribute("class", "card mb-3 class-card")
-    div.setAttribute("id", `card_${position["id"]}`)
+    div.setAttribute("id", `card_${cleanPositionId}`)
 
-    a.setAttribute("id", `title_${position["id"]}`)
+    a.setAttribute("id", `title_${cleanPositionId}`)
     a.setAttribute("data-bs-toggle", "collapse")
-    a.setAttribute("data-bs-target", `#collapse_${position["id"]}`)
+    a.setAttribute("data-bs-target", `#collapse_${cleanPositionId}`)
 
     collapseDiv.setAttribute("class", "card-body collapse")
-    collapseDiv.setAttribute("id", `collapse_${position["id"]}`)
+    collapseDiv.setAttribute("id", `collapse_${cleanPositionId}`)
 
 	h5.setAttribute("class","card-header target");
-	span1.setAttribute("id", `${position["id"]}_${position["positionClass"]}_class`)
-	span2.setAttribute("id", `${position["id"]}_${position["positionClass"]}_semester`)
+	span1.setAttribute("id", `${cleanPositionId}_class`)
+	span2.setAttribute("id", `${cleanPositionId}_semester`)
 	span3.setAttribute("class","float-end right-card-title")
-	span3.setAttribute("id", `${position["id"]}_${position["positionClass"]}_applicants`)
-    span4.setAttribute("id", `${position["id"]}_${position["positionClass"]}_degree`)
+	span3.setAttribute("id", `${cleanPositionId}_applicants`)
+    span4.setAttribute("id", `${cleanPositionId}_degree`)
 
     /*
                     <a id="seebutton" href="" value="" class="mt-2 btn open-position-btn btn-card"
