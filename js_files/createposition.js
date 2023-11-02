@@ -26,7 +26,7 @@ function createPositionObjectFromArrayWithoutId(positionInfo) {
     return {
         positionClass: positionInfo[0],
         requiredStanding: positionInfo[1],
-        semester: positionInfo[2],
+        semesters: positionInfo[2],
         positionType: positionInfo[3],
         notes: positionInfo[4]
     }

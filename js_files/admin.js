@@ -9,7 +9,7 @@ async function displayAllPositions() {
 }
 
 function getSemesterAsString(position) {
-    let semesterList = position["semester"]
+    let semesterList = position["semesters"]
     let semesterString = ""
     for(let i = 0; i < semesterList.length; i++) {
         semesterString += semesterList[i] + "/"
