@@ -118,7 +118,9 @@ export async function deleteAdmin() {
 //application
 
 export async function getAllApplications() {
-
+    const response = await fetch(`${baseApiPath}/applications`)
+    const data = await response.json()
+    return data
 }
 
 export async function addNewApplication() {

@@ -1,4 +1,4 @@
-import { getAllStudents } from "./restapi.js";
+import { getAllApplications } from "./restapi.js";
 
 
 function getReferenceToTableBody() {
@@ -7,11 +7,12 @@ function getReferenceToTableBody() {
 }
 
 async function addStudentRows() {
-    let studentList = await getAllStudents()
-    console.log(studentList)
+    let applicationList = await getAllApplications()
+    console.log(applicationList)
     let tableBody = getReferenceToTableBody()
 
-    for(let i = 0; i < studentList.length; i++) {
+    console.log(applicationList.length)
+    for(let i = 0; i < applicationList.length; i++) {
         let row = tableBody.insertRow()
         let cell1 = row.insertCell()
         let cell2 = row.insertCell()
@@ -23,22 +24,23 @@ async function addStudentRows() {
         let cell8 = row.insertCell()
         let cell9 = row.insertCell()
 
-        cell1.innerHTML = studentList[i]["studentId"]
-        cell2.innerHTML = studentList[i]["firstName"] + " " + studentList[i]["lastName"]
-        cell3.innerHTML = studentList[i]["umkcEmail"]
-        cell4.innerHTML = studentList[i]["standing"]
-        cell5.innerHTML = studentList[i]["currentMajor"]
-        cell6.innerHTML = studentList[i]["umkcGPA"]
-        cell7.innerHTML = studentList[i]["hoursDoneAtUmkc"]
+        cell1.innerHTML = applicationList[i]["studentId"]
+        cell2.innerHTML = applicationList[i]["firstName"] + " " + applicationList[i]["lastName"]
+        cell3.innerHTML = applicationList[i]["umkcEmail"]
+        cell4.innerHTML = applicationList[i]["standing"]
+        cell5.innerHTML = applicationList[i]["currentMajor"]
+        cell6.innerHTML = applicationList[i]["umkcGPA"]
+        cell7.innerHTML = applicationList[i]["hoursDoneAtUmkc"]
         cell8.innerHTML = "TODO: Add GTA Functionality"
         
-        let link = document.createElement("a")
-        link.setAttribute("href", "http://www.microsoft.com")
+        let fileList = applicationList[i]["file"]
 
-        let file = studentList[i]["file"]
-
-        let linkText = document.createTextNode(file["name"])
-        link.appendChild(linkText)
+        for(let j = 0; j < fileList.length; j++) {
+            let link = document.createElement("a")
+            link.setAttribute("href", "http://www.microsoft.com")
+            let linkText = document.createTextNode(fileList[j]["name"])
+            link.appendChild(linkText)
+        }
 
         cell9.appendChild(link)
     }
@@ -46,5 +48,7 @@ async function addStudentRows() {
 
 
 window.addEventListener('load', async function() {
+    document.getElementById("position_id").innerHTML = sessionStorage.getItem("positionId")
+
     await addStudentRows()
 })
