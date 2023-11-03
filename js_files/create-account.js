@@ -1,6 +1,6 @@
-import {addNewStudentWithFile, uploadFile } from "./restapi.js"
+import {addNewApplicationWithFile, uploadFile } from "./restapi.js"
 
-function getAllStudentInformationFromPage() {
+function getAllApplicationInformationFromPage() {
     let firstName = document.getElementById('first_name').value
     let lastName = document.getElementById('last_name').value
     let studentId = parseInt(document.getElementById('student_id').value)
@@ -13,30 +13,38 @@ function getAllStudentInformationFromPage() {
     let currentMajor = document.getElementById('current_major').value
 
     let dropDownBox = document.getElementById('umkc_classes')
-    let classes = Array.from(dropDownBox.options)
+    let desiredClasses = Array.from(dropDownBox.options)
                     .filter((option) => option.selected)
                     .map((option) => option.value)
     
-
+    let desiredTypes = []
+    let positionChoice = document.getElementById("position_choice")
+    if(positionChoice.value == "Both") {
+        desiredTypes.push("Grader", "Instructor")
+    }
+    else {
+        desiredTypes.push(positionChoice.value)
+    }
     return [
         firstName, lastName, studentId, umkcEmail, standing, 
-        graduatingSemester, umkcGPA, hoursUMKC, degree, currentMajor, classes
+        graduatingSemester, umkcGPA, hoursUMKC, degree, currentMajor, desiredClasses, desiredTypes
     ]
 } 
 
-function createStudentObjectFromArrayWithoutId(studentInfo) {
+function createApplicationObjectFromArrayWithoutId(applicationInfo) {
     return {
-        firstName: studentInfo[0],
-        lastName: studentInfo[1],
-        studentId: studentInfo[2],
-        umkcEmail: studentInfo[3],
-        standing: studentInfo[4],
-        graduatingSemester: studentInfo[5],
-        umkcGPA: studentInfo[6],
-        hoursDoneAtUmkc: studentInfo[7],
-        undergraduateDegree: studentInfo[8],
-        currentMajor: studentInfo[9],
-        classes: studentInfo[10]
+        firstName: applicationInfo[0],
+        lastName: applicationInfo[1],
+        studentId: applicationInfo[2],
+        umkcEmail: applicationInfo[3],
+        standing: applicationInfo[4],
+        graduatingSemester: applicationInfo[5],
+        umkcGPA: applicationInfo[6],
+        hoursDoneAtUmkc: applicationInfo[7],
+        undergraduateDegree: applicationInfo[8],
+        currentMajor: applicationInfo[9],
+        desiredClasses: applicationInfo[10],
+        desiredTypes: applicationInfo[11]
     }
 }
 
@@ -47,7 +55,7 @@ window.onbeforeunload = function() {
 window.addEventListener('load', function() {
     document.getElementById('application').addEventListener('submit', async function(event) {
         event.preventDefault()
-        let studentInfo = getAllStudentInformationFromPage()
+        let applicationInfo = getAllApplicationInformationFromPage()
 
         let file = document.getElementById('file_upload').files[0]
         let formData = new FormData()
@@ -57,7 +65,7 @@ window.addEventListener('load', function() {
         let fileId = response["id"]
         console.log(fileId)
 
-        let response1 = await addNewStudentWithFile(createStudentObjectFromArrayWithoutId(studentInfo), fileId)
+        let response1 = await addNewApplicationWithFile(createApplicationObjectFromArrayWithoutId(applicationInfo), fileId)
         console.log(response1)
 
         //location.reload()
