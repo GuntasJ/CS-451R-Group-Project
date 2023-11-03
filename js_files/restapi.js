@@ -123,8 +123,28 @@ export async function getAllApplications() {
     return data
 }
 
-export async function addNewApplication() {
+export async function addNewApplication(application) {
+    const response = await fetch(`${baseApiPath}/applications`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(application)
+    })
+    const data = await response.json()
+    return data
+}
 
+export async function addNewApplicationWithFile(application, fileId) {
+    const response = await fetch(`${baseApiPath}/applications/?file_id=${fileId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(application)
+    })
+    const data = await response.json()
+    return data
 }
 
 export async function updateApplication() {
@@ -137,20 +157,20 @@ export async function deleteApplication() {
 
 //file transfer
 
-// export async function getAllFiles() {
-//     const response = await fetch(`${baseApiPath}/files`)
-//     const data = await response.json()
-//     return data
-// }
+export async function getAllFiles() {
+    const response = await fetch(`${baseApiPath}/files`)
+    const data = await response.json()
+    return data
+}
 
-// export async function uploadFile(formData) {
-//     const response = await fetch(`${baseApiPath}/files`, {
-//         method: 'POST',
-//         body: formData
-//     })
-//     const data = await response.json()
-//     return data
-// }
+export async function uploadFile(formData) {
+    const response = await fetch(`${baseApiPath}/files`, {
+        method: 'POST',
+        body: formData
+    })
+    const data = await response.json()
+    return data
+}
 
 // export async function updateFile() {
 
