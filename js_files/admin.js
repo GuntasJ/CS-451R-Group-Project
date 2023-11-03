@@ -9,7 +9,7 @@ async function displayAllPositions() {
 }
 
 function getSemesterAsString(position) {
-    let semesterList = position["semester"]
+    let semesterList = position["semesters"]
     let semesterString = ""
     for(let i = 0; i < semesterList.length; i++) {
         semesterString += semesterList[i] + "/"
@@ -61,10 +61,13 @@ function displayPosition(position) {
     let applicantButtonAText = document.createTextNode("See Applicants")
 
     applicantButtonA.setAttribute("id", `seebutton_${cleanPositionId}`)
-    applicantButtonA.setAttribute("href", "")
+    applicantButtonA.setAttribute("href", "../admin_pages/applications.html")
     applicantButtonA.setAttribute("value", "")
     applicantButtonA.setAttribute("class", "mt-2 btn open-position-btn btn-card")
     applicantButtonA.setAttribute("style", "height:50px; line-height:35px;")
+    applicantButtonA.addEventListener('click', function() {
+        sessionStorage.setItem("positionId", `${position["positionClass"]}: ${position["positionType"]}`)
+    })
 
     notesLabel.setAttribute("class", "card-title float-start")
     positionLabel.setAttribute("class", "card-title mt-2 mb-3")
