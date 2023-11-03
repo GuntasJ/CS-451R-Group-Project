@@ -137,3 +137,29 @@ p5{
     font-size: 19px;
     margin-bottom: 20px;
 }
+
+Styling for the delete application page
+.umkc-delete-application {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.umkc-delete-application h1 {
+    color: #002D72; /* UMKC blue color */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.umkc-delete-application p {
+    margin: 10px 0;
+}
+
+.umkc-delete-application button {
+    background-color: #002D72; /* UMKC's delete action color (for example) */
+    color: #fff;
+    border: #FFdd00;
+    padding: 1px;
+    cursor: pointer;
+    width: 50%;
+}
