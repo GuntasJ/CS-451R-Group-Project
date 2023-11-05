@@ -789,8 +789,8 @@ a{
 }
 
 .umkc_classes {
-  margin: auto;
-  width: 48.75%;
-
+  /* margin: auto; */
+  width: 100%;
+  height: 50%;
 }
 
