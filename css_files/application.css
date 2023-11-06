@@ -163,3 +163,8 @@ Styling for the delete application page
     cursor: pointer;
     width: 50%;
 }
+
+.application-management{
+    margin:3%;
+   
+}
