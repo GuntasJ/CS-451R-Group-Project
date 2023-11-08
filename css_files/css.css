@@ -794,3 +794,13 @@ a{
   height: 50%;
 }
 
+.pop-up{
+  width: 400px;
+  background:rgb(0, 102, 204);
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color:#198754;
+}

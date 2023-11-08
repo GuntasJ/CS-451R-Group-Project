@@ -58,10 +58,10 @@ script type="text/javascript" src="../js_files/test.js"></script>
                            </p>
                         <div class="input-group mb-3 login-input">
                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                            <input type="text" class="form-control rounded-end" id="email"
-                                placeholder="UMKC email or username" required>
+                            <input type="email" class="form-control rounded-end" id="email"
+                                placeholder="UMKC email" required>
                             <div class="invalid-feedback">
-                                Enter UMKC email or username
+                                Enter UMKC email
                             </div>
                         </div>
                         <div class="input-group mb-3 login-input has-validation">
@@ -69,7 +69,7 @@ script type="text/javascript" src="../js_files/test.js"></script>
                             <input type="password" class="form-control" id="password" placeholder="Password"
                                 pattern="^().{6,24}$" required>
                             <div class="invalid-feedback">
-                                Enter Password 
+                                Enter Password (at least 6 characters long)
                             </div>
                         </div>
                         <div class="error" id="loginerror"></div>
@@ -82,8 +82,6 @@ script type="text/javascript" src="../js_files/test.js"></script>
         </div>
     </div>
 	</div>
-
-    
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
