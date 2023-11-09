@@ -804,3 +804,8 @@ a{
   transform: translate(-50%,-50%);
   color:#198754;
 }
+
+#edit_notes_modal_h4 {
+  text-align: center;
+  margin: auto;
+}

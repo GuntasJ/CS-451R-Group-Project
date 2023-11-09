@@ -68,6 +68,11 @@ export async function getAllPositions() {
     return data
 }
 
+export async function getPositionById(positionClass, positionType) {
+    const response = await fetch(`${baseApiPath}/positions/${positionClass}/${positionType}`)
+    return response
+} 
+
 export async function addNewPosition(position) {
     const response = await fetch(`${baseApiPath}/positions`, {
         method: 'POST',
@@ -77,6 +82,17 @@ export async function addNewPosition(position) {
         body: JSON.stringify(position)
     })
     return response;
+}
+
+export async function updateNotesOfPosition(positionClass, positionType, notes) {
+    const response = await fetch(`${baseApiPath}/positions/${positionClass}/${positionType}/notes`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notes)
+    })
+    return response
 }
 
 // export async function updatePosition(id, position) {
@@ -91,11 +107,12 @@ export async function addNewPosition(position) {
 //     return data
 // }
 
-// export async function deletePosition(id) {
-//     fetch(`${baseApiPath}/positions/${id}`, {
-//         method: 'DELETE'
-//     })
-// }
+export async function deletePosition(positionClass, positionType) {
+    const response = fetch(`${baseApiPath}/positions/${positionClass}/${positionType}`, {
+        method: 'DELETE'
+    })
+    return response;
+}
 
 //Admin API
 
@@ -136,7 +153,7 @@ export async function addNewApplication(application) {
 }
 
 export async function addNewApplicationWithFile(application, fileId) {
-    const response = await fetch(`${baseApiPath}/applications/?file_id=${fileId}`, {
+    const response = await fetch(`${baseApiPath}/applications?file_id=${fileId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -1,8 +1,7 @@
-import { getAllPositions } from "./restapi.js"
+import { getAllPositions, updateNotesOfPosition, getPositionById, deletePosition} from "./restapi.js"
 
 async function displayAllPositions() {
     const positions = await getAllPositions()
-    console.log(positions)
     for(let i = 0; i < positions.length; i++) {
         displayPosition(positions[i])
     }
@@ -18,18 +17,101 @@ function getSemesterAsString(position) {
 }
 
 function cleanId(positionClass, positionType) {
-    console.log(positionClass)
-    console.log(positionType)
-    console.log(positionClass.split(" ").join(''))
-    return (positionClass.split(" ").join('') + "_" + positionType);
+    return (positionClass.split(" ").join('') + "_" + positionType.split(" ").join(''));
 }
+
+/*
+<div class="mt-2 open-position-input-group input-group float-end">
+    <a id="editbutton" href="" value="" class="input-group-btn btn btn-card">Edit Notes</a>
+    <button id="closebutton" value="" class="input-group-btn btn btn-card">Close Position</button>
+</div>
+                    */
+
+/* 
+<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">
+<span class="glyphicon glyphicon-trash">LName FNmae</span>
+*/
+
+function createEditNotesButton(position) {
+    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
+    let editNotesButton = document.createElement("button")
+    let editNotesText = document.createTextNode("Edit Notes")
+
+    editNotesButton.setAttribute("id", `edit_notes_${cleanPositionId}`)
+    editNotesButton.setAttribute("class", "input-group-btn btn btn-card")
+    editNotesButton.setAttribute("data-bs-toggle", "modal")
+    editNotesButton.setAttribute("data-bs-target", "#edit_notes_modal")
+
+    editNotesButton.appendChild(editNotesText)
+
+    editNotesButton.addEventListener('click', function() {
+        document.getElementById("edit_notes_modal_text_area").defaultValue = position["notes"]
+        sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
+        console.log("cloekced")
+    })
+
+    return editNotesButton
+}
+
+function createClosePositionButton(position) {
+    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
+    let closePositionButton = document.createElement("button")
+    let closePositionText = document.createTextNode("Close Position")
+
+    closePositionButton.setAttribute("id", `close_button_${cleanPositionId}`)
+    closePositionButton.setAttribute("value", "")
+    closePositionButton.setAttribute("class", "input-group-btn btn btn-card")
+
+    closePositionButton.appendChild(closePositionText)
+
+    closePositionButton.addEventListener('click', async function(e) {
+       let response = await deletePosition(position["positionClass"], position["positionType"])
+       location.reload()
+    })
+
+    return closePositionButton
+}
+
+//<div class="card-body collapse" id="collapseOne">
+function createCollapseDiv(cleanId) {
+    let collapseDiv = document.createElement("div")
+    collapseDiv.setAttribute("class", "card-body collapse")
+    collapseDiv.setAttribute("id", `collapse_${cleanId}`)
+    return collapseDiv
+}
+
+//<label class="card-title mt-2 mb-3">Position: <span id="position">Grader</span></label> <br>
+function createPositionLabel(cleanId, positionType) {
+    let positionLabel = document.createElement("label")
+    positionLabel.setAttribute("class", "card-title mt-2 mb-3")
+    let positionText = document.createTextNode("Position: ")
+    
+    let positionSpan = document.createElement("span")
+    positionSpan.setAttribute("id", `position_span_${cleanId}`)
+    let positionSpanText = document.createTextNode(positionType)
+
+    positionSpan.appendChild(positionSpanText)
+    positionLabel.appendChild(positionText)
+    positionLabel.appendChild(positionSpan)
+    
+    return positionLabel
+}
+//<div class="mt-2 open-position-input-group input-group float-end"></div>
+function createEditNotesAndClosePositionDiv() {
+    let div = document.createElement("div")
+    div.setAttribute("class", "mt-2 open-position-input-group input-group float-end")
+    return div
+}
+
+
+
+
+
+
 
 function displayPosition(position) {
     let mainDiv = document.getElementById("sample")
     let div = document.createElement("div")
-    let collapseDiv = document.createElement("div")
-    let positionLabel = document.createElement("label")
-    let graderSpan = document.createElement("span")
     let br = document.createElement("br")
 
     let a = document.createElement("a")
@@ -53,8 +135,6 @@ function displayPosition(position) {
     let rightParenthesis = document.createTextNode(")")
     let standingRequired = document.createTextNode(`: ${position["requiredStanding"]}`)
     let applicantCount = document.createTextNode(`${position["applicants"].length} Applicants`)
-    let positionLabelText = document.createTextNode("Position: ")
-    let graderSpanText = document.createTextNode(`${position["positionType"]}`)
     let noteLabelText = document.createTextNode("Notes: ")
     let noteSpanText = document.createTextNode(`${position["notes"]}`)
 
@@ -66,12 +146,10 @@ function displayPosition(position) {
     applicantButtonA.setAttribute("class", "mt-2 btn open-position-btn btn-card")
     applicantButtonA.setAttribute("style", "height:50px; line-height:35px;")
     applicantButtonA.addEventListener('click', function() {
-        sessionStorage.setItem("positionId", `${position["positionClass"]}: ${position["positionType"]}`)
+        sessionStorage.setItem("cleanPositionId", `${position["positionClass"]}: ${position["positionType"]}`)
     })
 
     notesLabel.setAttribute("class", "card-title float-start")
-    positionLabel.setAttribute("class", "card-title mt-2 mb-3")
-    graderSpan.setAttribute("id", `position_${cleanPositionId}`)
 
     notesDiv.setAttribute("class", "notes-wrapper admin-notes")
     notesSpan.setAttribute("id", `notes_${cleanPositionId}`)
@@ -82,9 +160,6 @@ function displayPosition(position) {
     a.setAttribute("id", `title_${cleanPositionId}`)
     a.setAttribute("data-bs-toggle", "collapse")
     a.setAttribute("data-bs-target", `#collapse_${cleanPositionId}`)
-
-    collapseDiv.setAttribute("class", "card-body collapse")
-    collapseDiv.setAttribute("id", `collapse_${cleanPositionId}`)
 
 	h5.setAttribute("class","card-header target");
 	span1.setAttribute("id", `${cleanPositionId}_class`)
@@ -103,9 +178,16 @@ function displayPosition(position) {
                     <br>
                     */
 
-    positionLabel.appendChild(positionLabelText)
-    graderSpan.appendChild(graderSpanText)
-    positionLabel.appendChild(graderSpan)
+    let collapseDiv = createCollapseDiv(cleanPositionId)
+    let positionLabel = createPositionLabel(cleanId, position["positionType"])
+    let editNotesButton = createEditNotesButton(position)
+    let closePositionButton = createClosePositionButton(position)
+    let notesAndPositionDiv = createEditNotesAndClosePositionDiv()
+
+    notesAndPositionDiv.appendChild(editNotesButton)
+    notesAndPositionDiv.appendChild(closePositionButton)
+
+
     collapseDiv.appendChild(positionLabel)
     collapseDiv.appendChild(br)
 
@@ -119,7 +201,7 @@ function displayPosition(position) {
     applicantButtonA.appendChild(applicantButtonAText)
     collapseDiv.appendChild(applicantButtonA)
 
-
+    collapseDiv.appendChild(notesAndPositionDiv)
 
 
     mainDiv.appendChild(div)
@@ -143,114 +225,148 @@ function displayPosition(position) {
     h5.appendChild(span3)
     span3.appendChild(applicantCount)
 }
+
+function deconstructPositionId(modifiedPositionId) {
+    let positionClass = ""
+    let positionType = ""
+    let i = 1;
+    while(true) {
+        if(modifiedPositionId[i] == ']') {
+            break
+        }
+        positionClass += modifiedPositionId[i]
+        i++
+    }
+    i += 2
+    while(true) {
+        if(modifiedPositionId[i] == ']') {
+            break
+        }
+        positionType += modifiedPositionId[i]
+        i++
+    }
+
+    return [positionClass, positionType]
+}
 window.onload = function() {
     displayAllPositions()
+ 
+    document.getElementById("edit_notes_modal_button").addEventListener('click', async function(e) {
+        let id = deconstructPositionId(sessionStorage.getItem("positionId"))
+        let newNote = document.getElementById("edit_notes_modal_text_area").value
+
+        let response = await updateNotesOfPosition(id[0], id[1], {notes: newNote})
+
+        let editNotesModal = bootstrap.Modal.getInstance(document.getElementById('edit_notes_modal'))
+        editNotesModal.hide()
+        location.reload()
+    })
 }
 
-function Search() {
-  var input = document.getElementById("Search");
-  var filter = input.value.toLowerCase();
-  var nodes = document.getElementsByClassName('target');
+// function Search() {
+//   var input = document.getElementById("Search");
+//   var filter = input.value.toLowerCase();
+//   var nodes = document.getElementsByClassName('target');
 
-  for (i = 0; i < nodes.length; i++) {
-    if (nodes[i].innerText.toLowerCase().includes(filter)) {
-      nodes[i].parentNode.parentNode.parentNode.style.display = "block";
-    } else {
-      nodes[i].parentNode.parentNode.parentNode.style.display = "none";
-    }
-  }
-}
+//   for (i = 0; i < nodes.length; i++) {
+//     if (nodes[i].innerText.toLowerCase().includes(filter)) {
+//       nodes[i].parentNode.parentNode.parentNode.style.display = "block";
+//     } else {
+//       nodes[i].parentNode.parentNode.parentNode.style.display = "none";
+//     }
+//   }
+// }
 
-$(document).on("click", ".checkbox" ,function() {
-	changeCheckbox();
-});
+// $(document).on("click", ".checkbox" ,function() {
+// 	changeCheckbox();
+// });
 
-async function changeCheckbox(ele){
-	filter();
-}
+// async function changeCheckbox(ele){
+// 	filter();
+// }
 
-function filter(){
-	var filters="";
-	var majors="";
-	var pos="";
-	var semesters="";
-	var grad="";
+// function filter(){
+// 	var filters="";
+// 	var majors="";
+// 	var pos="";
+// 	var semesters="";
+// 	var grad="";
 	
-    var majorcheckboxes = document.getElementsByClassName('major-checkbox');
-	var poscheckboxes = document.getElementsByClassName('pos-checkbox');
-	var semestercheckboxes = document.getElementsByClassName('semester-checkbox');
-	var gradcheckboxes = document.getElementsByClassName('grad-checkbox');
+//     var majorcheckboxes = document.getElementsByClassName('major-checkbox');
+// 	var poscheckboxes = document.getElementsByClassName('pos-checkbox');
+// 	var semestercheckboxes = document.getElementsByClassName('semester-checkbox');
+// 	var gradcheckboxes = document.getElementsByClassName('grad-checkbox');
 	
-	majors = filterField(majorcheckboxes);
-	pos = filterField(poscheckboxes);
-	semesters = filterField(semestercheckboxes);
-	grad = filterField(gradcheckboxes);
+// 	majors = filterField(majorcheckboxes);
+// 	pos = filterField(poscheckboxes);
+// 	semesters = filterField(semestercheckboxes);
+// 	grad = filterField(gradcheckboxes);
 	
 	
-	if(typeof getPagetype === "function"){
-		var appcheckboxes = document.getElementsByClassName('app-checkbox');
-		var app = filterField(appcheckboxes);
-	}
+// 	if(typeof getPagetype === "function"){
+// 		var appcheckboxes = document.getElementsByClassName('app-checkbox');
+// 		var app = filterField(appcheckboxes);
+// 	}
 
-	function filterField(checkboxes){
-		var classes = "";
-		var list=[];
-		var counter = 0;
+// 	function filterField(checkboxes){
+// 		var classes = "";
+// 		var list=[];
+// 		var counter = 0;
 		
-		var chekboxInputs = Array.from(checkboxes).map(a => a.querySelector('input'));
+// 		var chekboxInputs = Array.from(checkboxes).map(a => a.querySelector('input'));
 		
-		var allAreUnselected = chekboxInputs.every(function(elem){
-			return !elem.checked;
-		});
-		if(allAreUnselected){
-			chekboxInputs.forEach(function(input){
-				if(input){
-					list[counter] = input.getAttribute("value"); 
-					counter++;
-					addFilter(list);
-				}
-			});
-		}
-		else {
-			chekboxInputs.forEach(function(input){
-				if(input.checked){
-					list[counter] = input.getAttribute("value"); 
-					counter++;
-					addFilter(list);
-				}
-			});
-		}
+// 		var allAreUnselected = chekboxInputs.every(function(elem){
+// 			return !elem.checked;
+// 		});
+// 		if(allAreUnselected){
+// 			chekboxInputs.forEach(function(input){
+// 				if(input){
+// 					list[counter] = input.getAttribute("value"); 
+// 					counter++;
+// 					addFilter(list);
+// 				}
+// 			});
+// 		}
+// 		else {
+// 			chekboxInputs.forEach(function(input){
+// 				if(input.checked){
+// 					list[counter] = input.getAttribute("value"); 
+// 					counter++;
+// 					addFilter(list);
+// 				}
+// 			});
+// 		}
 
 
-		function addFilter(list){
-			classes = ":not(";
-			for(var i=0;i<list.length;i++){
-				classes+="."+list[i];
-				if(i!==list.length-1)
-					classes+=","
-			}		
-		}
-		classes+=")"
+// 		function addFilter(list){
+// 			classes = ":not(";
+// 			for(var i=0;i<list.length;i++){
+// 				classes+="."+list[i];
+// 				if(i!==list.length-1)
+// 					classes+=","
+// 			}		
+// 		}
+// 		classes+=")"
 		
-		return classes;
-	}
+// 		return classes;
+// 	}
 	
-	filters=majors+", "+pos+", "+semesters+", "+grad
+// 	filters=majors+", "+pos+", "+semesters+", "+grad
 	
-	if(typeof getPagetype === "function")
-		filters+=", "+app;
+// 	if(typeof getPagetype === "function")
+// 		filters+=", "+app;
 	
-	$('.all').show().filter(filters).hide();
-}
+// 	$('.all').show().filter(filters).hide();
+// }
 
-function uncheck(ele){
-	var classes =  ele.classList;
-	 $('input.'+classes[1]).not(ele).prop('checked', false); 
-}
+// function uncheck(ele){
+// 	var classes =  ele.classList;
+// 	 $('input.'+classes[1]).not(ele).prop('checked', false); 
+// }
 
-function collapseCards(value){
-	$('.collapse').collapse(value);
-}
+// function collapseCards(value){
+// 	$('.collapse').collapse(value);
+// }
 
 /*
         <div class="col-sm-4" id="sample">
