@@ -107,11 +107,12 @@ export async function updateNotesOfPosition(positionClass, positionType, notes) 
 //     return data
 // }
 
-// export async function deletePosition(id) {
-//     fetch(`${baseApiPath}/positions/${id}`, {
-//         method: 'DELETE'
-//     })
-// }
+export async function deletePosition(positionClass, positionType) {
+    const response = fetch(`${baseApiPath}/positions/${positionClass}/${positionType}`, {
+        method: 'DELETE'
+    })
+    return response;
+}
 
 //Admin API
 

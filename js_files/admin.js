@@ -1,4 +1,4 @@
-import { getAllPositions, updateNotesOfPosition, getPositionById} from "./restapi.js"
+import { getAllPositions, updateNotesOfPosition, getPositionById, deletePosition} from "./restapi.js"
 
 async function displayAllPositions() {
     const positions = await getAllPositions()
@@ -53,15 +53,22 @@ function createEditNotesButton(position) {
     return editNotesButton
 }
 
-function createClosePositionButton(cleanId) {
+function createClosePositionButton(position) {
+    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
     let closePositionButton = document.createElement("button")
     let closePositionText = document.createTextNode("Close Position")
 
-    closePositionButton.setAttribute("id", `close_button_${cleanId}`)
+    closePositionButton.setAttribute("id", `close_button_${cleanPositionId}`)
     closePositionButton.setAttribute("value", "")
     closePositionButton.setAttribute("class", "input-group-btn btn btn-card")
 
     closePositionButton.appendChild(closePositionText)
+
+    closePositionButton.addEventListener('click', async function(e) {
+       let response = await deletePosition(position["positionClass"], position["positionType"])
+       location.reload()
+    })
+
     return closePositionButton
 }
 
@@ -174,7 +181,7 @@ function displayPosition(position) {
     let collapseDiv = createCollapseDiv(cleanPositionId)
     let positionLabel = createPositionLabel(cleanId, position["positionType"])
     let editNotesButton = createEditNotesButton(position)
-    let closePositionButton = createClosePositionButton(cleanPositionId)
+    let closePositionButton = createClosePositionButton(position)
     let notesAndPositionDiv = createEditNotesAndClosePositionDiv()
 
     notesAndPositionDiv.appendChild(editNotesButton)
@@ -248,13 +255,7 @@ window.onload = function() {
         let id = deconstructPositionId(sessionStorage.getItem("positionId"))
         let newNote = document.getElementById("edit_notes_modal_text_area").value
 
-        console.log(id[0] + " " + id[1])
-
-        let r = await getPositionById(id[0], id[1])
-        console.log(await r.json())
-
         let response = await updateNotesOfPosition(id[0], id[1], {notes: newNote})
-        console.log(response)
 
         let editNotesModal = bootstrap.Modal.getInstance(document.getElementById('edit_notes_modal'))
         editNotesModal.hide()
