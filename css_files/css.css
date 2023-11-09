@@ -809,3 +809,13 @@ a{
   text-align: center;
   margin: auto;
 }
+
+#filterButton {
+  display: block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #044c7c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
