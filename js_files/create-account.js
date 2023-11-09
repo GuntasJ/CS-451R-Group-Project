@@ -5,7 +5,7 @@ function getAllApplicationInformationFromPage() {
     let lastName = document.getElementById('last_name').value
     let studentId = parseInt(document.getElementById('student_id').value)
     let umkcEmail = document.getElementById('umkc_email').value
-    let standing = document.querySelector('input[name="level"]:checked').value
+    let standing = document.getElementById('standing').value
     let graduatingSemester = document.getElementById('graduating_semester').value
     let umkcGPA = parseFloat(document.getElementById('umkc_gpa').value)
     let hoursUMKC = parseInt(document.getElementById('hours_completed').value)
@@ -18,7 +18,7 @@ function getAllApplicationInformationFromPage() {
                     .map((option) => option.value)
     
     let desiredTypes = []
-    let positionChoice = document.getElementById("position_choice")
+    let positionChoice = document.getElementById("choose_position")
     if(positionChoice.value == "Both") {
         desiredTypes.push("Grader", "Instructor")
     }

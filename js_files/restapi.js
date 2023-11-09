@@ -136,7 +136,7 @@ export async function addNewApplication(application) {
 }
 
 export async function addNewApplicationWithFile(application, fileId) {
-    const response = await fetch(`${baseApiPath}/applications/?file_id=${fileId}`, {
+    const response = await fetch(`${baseApiPath}/applications?file_id=${fileId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
