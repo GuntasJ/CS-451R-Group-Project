@@ -48,7 +48,7 @@ async function addStudentRows() {
 
 
 window.addEventListener('load', async function() {
-    document.getElementById("position_id").innerHTML = sessionStorage.getItem("positionId")
+    document.getElementById("position_id").innerHTML = sessionStorage.getItem("cleanPositionId")
 
     await addStudentRows()
 })

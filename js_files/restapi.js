@@ -68,6 +68,11 @@ export async function getAllPositions() {
     return data
 }
 
+export async function getPositionById(positionClass, positionType) {
+    const response = await fetch(`${baseApiPath}/positions/${positionClass}/${positionType}`)
+    return response
+} 
+
 export async function addNewPosition(position) {
     const response = await fetch(`${baseApiPath}/positions`, {
         method: 'POST',
@@ -77,6 +82,17 @@ export async function addNewPosition(position) {
         body: JSON.stringify(position)
     })
     return response;
+}
+
+export async function updateNotesOfPosition(positionClass, positionType, notes) {
+    const response = await fetch(`${baseApiPath}/positions/${positionClass}/${positionType}/notes`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notes)
+    })
+    return response
 }
 
 // export async function updatePosition(id, position) {
