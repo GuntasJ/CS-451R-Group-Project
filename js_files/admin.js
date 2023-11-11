@@ -2,10 +2,64 @@ import { getAllPositions, updateNotesOfPosition, getPositionById, deletePosition
 
 async function displayAllPositions() {
     const positions = await getAllPositions()
-    for(let i = 0; i < positions.length; i++) {
-        displayPosition(positions[i])
+    const filteredPositions = filterPositions(positions)
+
+    for(let i = 0; i < filteredPositions.length; i++) {
+        displayPosition(filteredPositions[i])
     }
 }
+
+
+function makeFilterRadioButtonsDeselectable() {
+    let graduateRadioButton = document.getElementById("grad")
+    let undergraduateRadioButton = document.getElementById("undergrad")
+
+    graduateRadioButton.addEventListener('click', function(e) {
+        if(graduateRadioButton.checked) {
+            graduateRadioButton.checked = false
+        }
+    })
+    undergraduateRadioButton.addEventListener('click', function(e) {
+        if(undergraduateRadioButton.checked) {
+            undergraduateRadioButton.checked = false
+        }
+    })
+}
+
+
+function filterPositions(positions) {
+    let filteredPositions = []
+    filteredPositions.push(...positions.filter((position) => position["applicants"].length > 0))
+    //applicants
+    if(document.getElementById("noapplicants").checked) {
+        filteredPositions.push(...positions.filter((position) => position["applicants"].length == 0)) 
+    }
+
+    //semester
+    if(document.getElementById("fall-checkbox").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Fall"))
+    }
+    if(document.getElementById("spring-checkbox").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Spring"))
+    }
+    if(document.getElementById("summer-checkbox").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Summer"))
+    }
+
+    //standing
+    if(document.getElementById("grad").checked) {
+        filteredPositions = filteredPositions.filter((position) => 
+            position["requiredStanding"] == "MS" || position["requiredStanding"] == "PhD")
+    }
+    if(document.getElementById("undergrad").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["requiredStanding"] == "BS")
+    }
+
+
+    return filteredPositions
+}
+
+
 
 function getSemesterAsString(position) {
     let semesterList = position["semesters"]
@@ -244,7 +298,8 @@ function deconstructPositionId(modifiedPositionId) {
 }
 window.onload = function() {
     displayAllPositions()
- 
+    makeFilterRadioButtonsDeselectable()
+
     document.getElementById("edit_notes_modal_button").addEventListener('click', async function(e) {
         let id = deconstructPositionId(sessionStorage.getItem("positionId"))
         let newNote = document.getElementById("edit_notes_modal_text_area").value
@@ -265,6 +320,11 @@ window.onload = function() {
 
         closeConfirmationModal.hide()
         location.reload()
+    })
+
+    document.getElementById("filterButton").addEventListener('click', function(e) {
+        document.getElementById("sample").replaceChildren()
+        displayAllPositions()
     })
 }
 
