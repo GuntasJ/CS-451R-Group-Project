@@ -2,10 +2,64 @@ import { getAllPositions, updateNotesOfPosition, getPositionById, deletePosition
 
 async function displayAllPositions() {
     const positions = await getAllPositions()
-    for(let i = 0; i < positions.length; i++) {
-        displayPosition(positions[i])
+    const filteredPositions = filterPositions(positions)
+
+    for(let i = 0; i < filteredPositions.length; i++) {
+        displayPosition(filteredPositions[i])
     }
 }
+
+
+function makeFilterRadioButtonsDeselectable() {
+    let graduateRadioButton = document.getElementById("grad")
+    let undergraduateRadioButton = document.getElementById("undergrad")
+
+    graduateRadioButton.addEventListener('click', function(e) {
+        if(graduateRadioButton.checked) {
+            graduateRadioButton.checked = false
+        }
+    })
+    undergraduateRadioButton.addEventListener('click', function(e) {
+        if(undergraduateRadioButton.checked) {
+            undergraduateRadioButton.checked = false
+        }
+    })
+}
+
+
+function filterPositions(positions) {
+    let filteredPositions = []
+    filteredPositions.push(...positions.filter((position) => position["applicants"].length > 0))
+    //applicants
+    if(document.getElementById("noapplicants").checked) {
+        filteredPositions.push(...positions.filter((position) => position["applicants"].length == 0)) 
+    }
+
+    //semester
+    if(document.getElementById("fall-checkbox").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Fall"))
+    }
+    if(document.getElementById("spring-checkbox").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Spring"))
+    }
+    if(document.getElementById("summer-checkbox").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Summer"))
+    }
+
+    //standing
+    if(document.getElementById("grad").checked) {
+        filteredPositions = filteredPositions.filter((position) => 
+            position["requiredStanding"] == "MS" || position["requiredStanding"] == "PhD")
+    }
+    if(document.getElementById("undergrad").checked) {
+        filteredPositions = filteredPositions.filter((position) => position["requiredStanding"] == "BS")
+    }
+
+
+    return filteredPositions
+}
+
+
 
 function getSemesterAsString(position) {
     let semesterList = position["semesters"]
@@ -47,7 +101,6 @@ function createEditNotesButton(position) {
     editNotesButton.addEventListener('click', function() {
         document.getElementById("edit_notes_modal_text_area").defaultValue = position["notes"]
         sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
-        console.log("cloekced")
     })
 
     return editNotesButton
@@ -61,12 +114,13 @@ function createClosePositionButton(position) {
     closePositionButton.setAttribute("id", `close_button_${cleanPositionId}`)
     closePositionButton.setAttribute("value", "")
     closePositionButton.setAttribute("class", "input-group-btn btn btn-card")
+    closePositionButton.setAttribute("data-bs-toggle", "modal")
+    closePositionButton.setAttribute("data-bs-target", "#close_confirmation_modal")
 
     closePositionButton.appendChild(closePositionText)
 
     closePositionButton.addEventListener('click', async function(e) {
-       let response = await deletePosition(position["positionClass"], position["positionType"])
-       location.reload()
+        sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
     })
 
     return closePositionButton
@@ -102,12 +156,6 @@ function createEditNotesAndClosePositionDiv() {
     div.setAttribute("class", "mt-2 open-position-input-group input-group float-end")
     return div
 }
-
-
-
-
-
-
 
 function displayPosition(position) {
     let mainDiv = document.getElementById("sample")
@@ -250,7 +298,8 @@ function deconstructPositionId(modifiedPositionId) {
 }
 window.onload = function() {
     displayAllPositions()
- 
+    makeFilterRadioButtonsDeselectable()
+
     document.getElementById("edit_notes_modal_button").addEventListener('click', async function(e) {
         let id = deconstructPositionId(sessionStorage.getItem("positionId"))
         let newNote = document.getElementById("edit_notes_modal_text_area").value
@@ -260,6 +309,22 @@ window.onload = function() {
         let editNotesModal = bootstrap.Modal.getInstance(document.getElementById('edit_notes_modal'))
         editNotesModal.hide()
         location.reload()
+    })
+
+    document.getElementById("close_confirmation_button").addEventListener('click', async function(e) {
+        let id = deconstructPositionId(sessionStorage.getItem("positionId"))
+        console.log(id)
+
+        let response = await deletePosition(id[0], id[1])
+        let closeConfirmationModal = bootstrap.Modal.getInstance(document.getElementById("close_confirmation_modal"))
+
+        closeConfirmationModal.hide()
+        location.reload()
+    })
+
+    document.getElementById("filterButton").addEventListener('click', function(e) {
+        document.getElementById("sample").replaceChildren()
+        displayAllPositions()
     })
 }
 
