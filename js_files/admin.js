@@ -195,6 +195,7 @@ function displayPosition(position) {
     applicantButtonA.setAttribute("style", "height:50px; line-height:35px;")
     applicantButtonA.addEventListener('click', function() {
         sessionStorage.setItem("cleanPositionId", `${position["positionClass"]}: ${position["positionType"]}`)
+        sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
     })
 
     notesLabel.setAttribute("class", "card-title float-start")
@@ -296,6 +297,7 @@ function deconstructPositionId(modifiedPositionId) {
 
     return [positionClass, positionType]
 }
+
 window.onload = function() {
     displayAllPositions()
     makeFilterRadioButtonsDeselectable()

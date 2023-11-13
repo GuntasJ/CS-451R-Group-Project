@@ -1,4 +1,4 @@
-import { getAllApplications } from "./restapi.js";
+import { getAllApplications, getPositionById } from "./restapi.js";
 
 
 function getReferenceToTableBody() {
@@ -6,12 +6,42 @@ function getReferenceToTableBody() {
     return tableBody;
 }
 
+function deconstructPositionId(modifiedPositionId) {
+    let positionClass = ""
+    let positionType = ""
+    let i = 1;
+    while(true) {
+        if(modifiedPositionId[i] == ']') {
+            break
+        }
+        positionClass += modifiedPositionId[i]
+        i++
+    }
+    i += 2
+    while(true) {
+        if(modifiedPositionId[i] == ']') {
+            break
+        }
+        positionType += modifiedPositionId[i]
+        i++
+    }
+
+    return [positionClass, positionType]
+}
+
 async function addStudentRows() {
-    let applicationList = await getAllApplications()
-    console.log(applicationList)
+
+    console.log(sessionStorage.getItem("positionId"))
+    let positionId = deconstructPositionId(sessionStorage.getItem("positionId"))
+
+    let positionResponse = await getPositionById(positionId[0], positionId[1])
+    let position = await positionResponse.json()
+    //console.log(position)
+    let applicationList = position["applicants"]
+
     let tableBody = getReferenceToTableBody()
 
-    console.log(applicationList.length)
+    //console.log(applicationList.length)
     for(let i = 0; i < applicationList.length; i++) {
         let row = tableBody.insertRow()
         let cell1 = row.insertCell()
@@ -31,18 +61,30 @@ async function addStudentRows() {
         cell5.innerHTML = applicationList[i]["currentMajor"]
         cell6.innerHTML = applicationList[i]["umkcGPA"]
         cell7.innerHTML = applicationList[i]["hoursDoneAtUmkc"]
-        cell8.innerHTML = "TODO: Add GTA Functionality"
+        cell8.innerHTML = "TODO"
+
+    
+        cell9.setAttribute("class", "overflow-auto")
         
-        let fileList = applicationList[i]["file"]
+        //console.log(applicationList[i])
+        let fileList = applicationList[i]["files"]
+        //console.log(fileList)
 
         for(let j = 0; j < fileList.length; j++) {
+            let fileObject = new Blob([new Int8Array(fileList[j]["data"])], { type: 'application/pdf' });
+
             let link = document.createElement("a")
-            link.setAttribute("href", "http://www.microsoft.com")
+        
+            link.setAttribute("href", fileList[j]["uriDownload"])
+            link.setAttribute("target", "_blank")
+            link.setAttribute("class", "text-truncate")
             let linkText = document.createTextNode(fileList[j]["name"])
+            console.log(fileList[j]["name"])
             link.appendChild(linkText)
+            cell9.append(link)
         }
 
-        cell9.appendChild(link)
+        //cell9.appendChild(link)
     }
 }
 
