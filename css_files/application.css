@@ -138,16 +138,15 @@ p5{
     margin-bottom: 20px;
 }
 .umkc-delete-application button {
-    background-color: #8E1600; /* UMKC's delete action color (for example) */
+    
     color: #fff;
     border: none;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
-    font-family: "Times New Roman", Times, serif;
     
 }
 .umkc-delete-application {
-    width: 175px;
+    width: 75px;
     margin: auto;
     text-align: center;
 }
