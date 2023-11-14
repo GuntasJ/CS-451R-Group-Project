@@ -71,7 +71,7 @@ async function addStudentRows() {
         //console.log(fileList)
 
         for(let j = 0; j < fileList.length; j++) {
-            let fileObject = new Blob([new Int8Array(fileList[j]["data"])], { type: 'application/pdf' });
+        
 
             let link = document.createElement("a")
         
