@@ -1,4 +1,4 @@
-import { getAllApplications, getPositionById } from "./restapi.js";
+import { getPositionById } from "./restapi.js";
 
 function getReferenceToTableBody() {
   let tableBody = document
@@ -34,7 +34,11 @@ async function addStudentRows() {
   console.log(sessionStorage.getItem("positionId"));
   let positionId = deconstructPositionId(sessionStorage.getItem("positionId"));
 
-  let positionResponse = await getPositionById(positionId[0], positionId[1]);
+  let positionResponse = await getPositionById(
+    positionId[0],
+    positionId[1],
+    sessionStorage.getItem("jwtToken")
+  );
   let position = await positionResponse.json();
   //console.log(position)
   let applicationList = position["applicants"];

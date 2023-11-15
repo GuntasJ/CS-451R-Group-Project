@@ -1,4 +1,4 @@
-const baseApiPath = 'http://localhost:8080/tags/api/v1'
+const baseApiPath = "http://localhost:8080/tags/api/v1";
 
 //Students API
 
@@ -62,37 +62,60 @@ const baseApiPath = 'http://localhost:8080/tags/api/v1'
 
 //Positions API
 
-export async function getAllPositions() {
-    const response = await fetch(`${baseApiPath}/positions`)
-    const data = await response.json()
-    return data
+export async function getAllPositions(token) {
+  const response = await fetch(`${baseApiPath}/admin/positions`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+  return data;
 }
 
-export async function getPositionById(positionClass, positionType) {
-    const response = await fetch(`${baseApiPath}/positions/${positionClass}/${positionType}`)
-    return response
-} 
-
-export async function addNewPosition(position) {
-    const response = await fetch(`${baseApiPath}/positions`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(position)
-    })
-    return response;
+export async function getPositionById(positionClass, positionType, token) {
+  const response = await fetch(
+    `${baseApiPath}/admin/positions/${positionClass}/${positionType}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
 }
 
-export async function updateNotesOfPosition(positionClass, positionType, notes) {
-    const response = await fetch(`${baseApiPath}/positions/${positionClass}/${positionType}/notes`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(notes)
-    })
-    return response
+export async function addNewPosition(position, token) {
+  const response = await fetch(`${baseApiPath}/admin/positions`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(position),
+  });
+  return response;
+}
+
+export async function updateNotesOfPosition(
+  positionClass,
+  positionType,
+  notes,
+  token
+) {
+  const response = await fetch(
+    `${baseApiPath}/admin/positions/${positionClass}/${positionType}/notes`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(notes),
+    }
+  );
+  return response;
 }
 
 // export async function updatePosition(id, position) {
@@ -107,86 +130,87 @@ export async function updateNotesOfPosition(positionClass, positionType, notes) 
 //     return data
 // }
 
-export async function deletePosition(positionClass, positionType) {
-    const response = fetch(`${baseApiPath}/positions/${positionClass}/${positionType}`, {
-        method: 'DELETE'
-    })
-    return response;
-}
-
-//Admin API
-
-export async function getAllAdmins() {
-
-}
-
-export async function addNewAdmin() {
-
-}
-
-export async function updateAdmin() {
-
-}
-
-export async function deleteAdmin() {
-
+export async function deletePosition(positionClass, positionType, token) {
+  const response = fetch(
+    `${baseApiPath}/admin/positions/${positionClass}/${positionType}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
 }
 
 //application
 
-export async function getAllApplications() {
-    const response = await fetch(`${baseApiPath}/applications`)
-    const data = await response.json()
-    return data
+export async function getAllApplications(token) {
+  const response = await fetch(`${baseApiPath}/applications`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+  return data;
 }
 
-export async function addNewApplication(application) {
-    const response = await fetch(`${baseApiPath}/applications`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(application)
-    })
-    const data = await response.json()
-    return data
+export async function addNewApplication(application, token) {
+  const response = await fetch(`${baseApiPath}/applications`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(application),
+  });
+  const data = await response.json();
+  return data;
 }
 
-export async function addNewApplicationWithFile(application, fileId) {
-    const response = await fetch(`${baseApiPath}/applications?file_id=${fileId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(application)
-    })
-    const data = await response.json()
-    return data
+export async function addNewApplicationWithFile(application, fileId, token) {
+  const response = await fetch(
+    `${baseApiPath}/applications?file_id=${fileId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(application),
+    }
+  );
+  const data = await response.json();
+  return data;
 }
 
-export async function updateApplication() {
+export async function updateApplication() {}
 
-}
-
-export async function deleteApplication() {
-
-}
+export async function deleteApplication() {}
 
 //file transfer
 
-export async function getAllFiles() {
-    const response = await fetch(`${baseApiPath}/files`)
-    const data = await response.json()
-    return data
+export async function getAllFiles(token) {
+  const response = await fetch(`${baseApiPath}/files`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+  return data;
 }
 
-export async function uploadFile(formData) {
-    const response = await fetch(`${baseApiPath}/files`, {
-        method: 'POST',
-        body: formData
-    })
-    const data = await response.json()
-    return data
+export async function uploadFile(formData, token) {
+  const response = await fetch(`${baseApiPath}/files`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+  const data = await response.json();
+  return data;
 }
 
 // export async function updateFile() {

@@ -1,77 +1,93 @@
-import { getAllPositions, updateNotesOfPosition, getPositionById, deletePosition} from "./restapi.js"
+import {
+  getAllPositions,
+  updateNotesOfPosition,
+  deletePosition,
+} from "./restapi.js";
 
 async function displayAllPositions() {
-    const positions = await getAllPositions()
-    const filteredPositions = filterPositions(positions)
+  const positions = await getAllPositions(sessionStorage.getItem("jwtToken"));
+  const filteredPositions = filterPositions(positions);
 
-    for(let i = 0; i < filteredPositions.length; i++) {
-        displayPosition(filteredPositions[i])
-    }
+  for (let i = 0; i < filteredPositions.length; i++) {
+    displayPosition(filteredPositions[i]);
+  }
 }
-
 
 function makeFilterRadioButtonsDeselectable() {
-    let graduateRadioButton = document.getElementById("grad")
-    let undergraduateRadioButton = document.getElementById("undergrad")
+  let graduateRadioButton = document.getElementById("grad");
+  let undergraduateRadioButton = document.getElementById("undergrad");
 
-    graduateRadioButton.addEventListener('click', function(e) {
-        if(graduateRadioButton.checked) {
-            graduateRadioButton.checked = false
-        }
-    })
-    undergraduateRadioButton.addEventListener('click', function(e) {
-        if(undergraduateRadioButton.checked) {
-            undergraduateRadioButton.checked = false
-        }
-    })
+  graduateRadioButton.addEventListener("click", function (e) {
+    if (graduateRadioButton.checked) {
+      graduateRadioButton.checked = false;
+    }
+  });
+  undergraduateRadioButton.addEventListener("click", function (e) {
+    if (undergraduateRadioButton.checked) {
+      undergraduateRadioButton.checked = false;
+    }
+  });
 }
-
 
 function filterPositions(positions) {
-    let filteredPositions = []
-    filteredPositions.push(...positions.filter((position) => position["applicants"].length > 0))
-    //applicants
-    if(document.getElementById("noapplicants").checked) {
-        filteredPositions.push(...positions.filter((position) => position["applicants"].length == 0)) 
-    }
+  let filteredPositions = [];
+  filteredPositions.push(
+    ...positions.filter((position) => position["applicants"].length > 0)
+  );
+  //applicants
+  if (document.getElementById("noapplicants").checked) {
+    filteredPositions.push(
+      ...positions.filter((position) => position["applicants"].length == 0)
+    );
+  }
 
-    //semester
-    if(document.getElementById("fall-checkbox").checked) {
-        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Fall"))
-    }
-    if(document.getElementById("spring-checkbox").checked) {
-        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Spring"))
-    }
-    if(document.getElementById("summer-checkbox").checked) {
-        filteredPositions = filteredPositions.filter((position) => position["semesters"].includes("Summer"))
-    }
+  //semester
+  if (document.getElementById("fall-checkbox").checked) {
+    filteredPositions = filteredPositions.filter((position) =>
+      position["semesters"].includes("Fall")
+    );
+  }
+  if (document.getElementById("spring-checkbox").checked) {
+    filteredPositions = filteredPositions.filter((position) =>
+      position["semesters"].includes("Spring")
+    );
+  }
+  if (document.getElementById("summer-checkbox").checked) {
+    filteredPositions = filteredPositions.filter((position) =>
+      position["semesters"].includes("Summer")
+    );
+  }
 
-    //standing
-    if(document.getElementById("grad").checked) {
-        filteredPositions = filteredPositions.filter((position) => 
-            position["requiredStanding"] == "MS" || position["requiredStanding"] == "PhD")
-    }
-    if(document.getElementById("undergrad").checked) {
-        filteredPositions = filteredPositions.filter((position) => position["requiredStanding"] == "BS")
-    }
+  //standing
+  if (document.getElementById("grad").checked) {
+    filteredPositions = filteredPositions.filter(
+      (position) =>
+        position["requiredStanding"] == "MS" ||
+        position["requiredStanding"] == "PhD"
+    );
+  }
+  if (document.getElementById("undergrad").checked) {
+    filteredPositions = filteredPositions.filter(
+      (position) => position["requiredStanding"] == "BS"
+    );
+  }
 
-
-    return filteredPositions
+  return filteredPositions;
 }
 
-
-
 function getSemesterAsString(position) {
-    let semesterList = position["semesters"]
-    let semesterString = ""
-    for(let i = 0; i < semesterList.length; i++) {
-        semesterString += semesterList[i] + "/"
-    }
-    return semesterString.slice(0, -1)
+  let semesterList = position["semesters"];
+  let semesterString = "";
+  for (let i = 0; i < semesterList.length; i++) {
+    semesterString += semesterList[i] + "/";
+  }
+  return semesterString.slice(0, -1);
 }
 
 function cleanId(positionClass, positionType) {
-    return (positionClass.split(" ").join('') + "_" + positionType.split(" ").join(''));
+  return (
+    positionClass.split(" ").join("") + "_" + positionType.split(" ").join("")
+  );
 }
 
 /*
@@ -87,137 +103,169 @@ function cleanId(positionClass, positionType) {
 */
 
 function createEditNotesButton(position) {
-    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
-    let editNotesButton = document.createElement("button")
-    let editNotesText = document.createTextNode("Edit Notes")
+  let cleanPositionId = cleanId(
+    position["positionClass"],
+    position["positionType"]
+  );
+  let editNotesButton = document.createElement("button");
+  let editNotesText = document.createTextNode("Edit Notes");
 
-    editNotesButton.setAttribute("id", `edit_notes_${cleanPositionId}`)
-    editNotesButton.setAttribute("class", "input-group-btn btn btn-card")
-    editNotesButton.setAttribute("data-bs-toggle", "modal")
-    editNotesButton.setAttribute("data-bs-target", "#edit_notes_modal")
+  editNotesButton.setAttribute("id", `edit_notes_${cleanPositionId}`);
+  editNotesButton.setAttribute("class", "input-group-btn btn btn-card");
+  editNotesButton.setAttribute("data-bs-toggle", "modal");
+  editNotesButton.setAttribute("data-bs-target", "#edit_notes_modal");
 
-    editNotesButton.appendChild(editNotesText)
+  editNotesButton.appendChild(editNotesText);
 
-    editNotesButton.addEventListener('click', function() {
-        document.getElementById("edit_notes_modal_text_area").defaultValue = position["notes"]
-        sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
-    })
+  editNotesButton.addEventListener("click", function () {
+    document.getElementById("edit_notes_modal_text_area").defaultValue =
+      position["notes"];
+    sessionStorage.setItem(
+      "positionId",
+      `[${position["positionClass"]}][${position["positionType"]}]`
+    );
+  });
 
-    return editNotesButton
+  return editNotesButton;
 }
 
 function createClosePositionButton(position) {
-    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
-    let closePositionButton = document.createElement("button")
-    let closePositionText = document.createTextNode("Close Position")
+  let cleanPositionId = cleanId(
+    position["positionClass"],
+    position["positionType"]
+  );
+  let closePositionButton = document.createElement("button");
+  let closePositionText = document.createTextNode("Close Position");
 
-    closePositionButton.setAttribute("id", `close_button_${cleanPositionId}`)
-    closePositionButton.setAttribute("value", "")
-    closePositionButton.setAttribute("class", "input-group-btn btn btn-card")
-    closePositionButton.setAttribute("data-bs-toggle", "modal")
-    closePositionButton.setAttribute("data-bs-target", "#close_confirmation_modal")
+  closePositionButton.setAttribute("id", `close_button_${cleanPositionId}`);
+  closePositionButton.setAttribute("value", "");
+  closePositionButton.setAttribute("class", "input-group-btn btn btn-card");
+  closePositionButton.setAttribute("data-bs-toggle", "modal");
+  closePositionButton.setAttribute(
+    "data-bs-target",
+    "#close_confirmation_modal"
+  );
 
-    closePositionButton.appendChild(closePositionText)
+  closePositionButton.appendChild(closePositionText);
 
-    closePositionButton.addEventListener('click', async function(e) {
-        sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
-    })
+  closePositionButton.addEventListener("click", async function (e) {
+    sessionStorage.setItem(
+      "positionId",
+      `[${position["positionClass"]}][${position["positionType"]}]`
+    );
+  });
 
-    return closePositionButton
+  return closePositionButton;
 }
 
 //<div class="card-body collapse" id="collapseOne">
 function createCollapseDiv(cleanId) {
-    let collapseDiv = document.createElement("div")
-    collapseDiv.setAttribute("class", "card-body collapse")
-    collapseDiv.setAttribute("id", `collapse_${cleanId}`)
-    return collapseDiv
+  let collapseDiv = document.createElement("div");
+  collapseDiv.setAttribute("class", "card-body collapse");
+  collapseDiv.setAttribute("id", `collapse_${cleanId}`);
+  return collapseDiv;
 }
 
 //<label class="card-title mt-2 mb-3">Position: <span id="position">Grader</span></label> <br>
 function createPositionLabel(cleanId, positionType) {
-    let positionLabel = document.createElement("label")
-    positionLabel.setAttribute("class", "card-title mt-2 mb-3")
-    let positionText = document.createTextNode("Position: ")
-    
-    let positionSpan = document.createElement("span")
-    positionSpan.setAttribute("id", `position_span_${cleanId}`)
-    let positionSpanText = document.createTextNode(positionType)
+  let positionLabel = document.createElement("label");
+  positionLabel.setAttribute("class", "card-title mt-2 mb-3");
+  let positionText = document.createTextNode("Position: ");
 
-    positionSpan.appendChild(positionSpanText)
-    positionLabel.appendChild(positionText)
-    positionLabel.appendChild(positionSpan)
-    
-    return positionLabel
+  let positionSpan = document.createElement("span");
+  positionSpan.setAttribute("id", `position_span_${cleanId}`);
+  let positionSpanText = document.createTextNode(positionType);
+
+  positionSpan.appendChild(positionSpanText);
+  positionLabel.appendChild(positionText);
+  positionLabel.appendChild(positionSpan);
+
+  return positionLabel;
 }
 //<div class="mt-2 open-position-input-group input-group float-end"></div>
 function createEditNotesAndClosePositionDiv() {
-    let div = document.createElement("div")
-    div.setAttribute("class", "mt-2 open-position-input-group input-group float-end")
-    return div
+  let div = document.createElement("div");
+  div.setAttribute(
+    "class",
+    "mt-2 open-position-input-group input-group float-end"
+  );
+  return div;
 }
 
 function displayPosition(position) {
-    let mainDiv = document.getElementById("sample")
-    let div = document.createElement("div")
-    let br = document.createElement("br")
+  let mainDiv = document.getElementById("sample");
+  let div = document.createElement("div");
+  let br = document.createElement("br");
 
-    let a = document.createElement("a")
-    let h5 = document.createElement("h5")
-    let span1 = document.createElement("span")
-    let span2 = document.createElement("span")
-    let span3 = document.createElement("span")
-    let span4 = document.createElement("span")
-    
-    let notesLabel = document.createElement("label")
-    let notesDiv = document.createElement("div")
-    let notesSpan = document.createElement("span")
+  let a = document.createElement("a");
+  let h5 = document.createElement("h5");
+  let span1 = document.createElement("span");
+  let span2 = document.createElement("span");
+  let span3 = document.createElement("span");
+  let span4 = document.createElement("span");
 
-    let applicantButtonA = document.createElement("a")
+  let notesLabel = document.createElement("label");
+  let notesDiv = document.createElement("div");
+  let notesSpan = document.createElement("span");
 
-    let cleanPositionId = cleanId(position["positionClass"], position["positionType"])
+  let applicantButtonA = document.createElement("a");
 
-    let positionClass = document.createTextNode(position["positionClass"])
-    let leftParenthesis = document.createTextNode(" (")
-    let positionSemester = document.createTextNode(getSemesterAsString(position))
-    let rightParenthesis = document.createTextNode(")")
-    let standingRequired = document.createTextNode(`: ${position["requiredStanding"]}`)
-    let applicantCount = document.createTextNode(`${position["applicants"].length} Applicants`)
-    let noteLabelText = document.createTextNode("Notes: ")
-    let noteSpanText = document.createTextNode(`${position["notes"]}`)
+  let cleanPositionId = cleanId(
+    position["positionClass"],
+    position["positionType"]
+  );
 
-    let applicantButtonAText = document.createTextNode("See Applicants")
+  let positionClass = document.createTextNode(position["positionClass"]);
+  let leftParenthesis = document.createTextNode(" (");
+  let positionSemester = document.createTextNode(getSemesterAsString(position));
+  let rightParenthesis = document.createTextNode(")");
+  let standingRequired = document.createTextNode(
+    `: ${position["requiredStanding"]}`
+  );
+  let applicantCount = document.createTextNode(
+    `${position["applicants"].length} Applicants`
+  );
+  let noteLabelText = document.createTextNode("Notes: ");
+  let noteSpanText = document.createTextNode(`${position["notes"]}`);
 
-    applicantButtonA.setAttribute("id", `seebutton_${cleanPositionId}`)
-    applicantButtonA.setAttribute("href", "../admin_pages/applications.html")
-    applicantButtonA.setAttribute("value", "")
-    applicantButtonA.setAttribute("class", "mt-2 btn open-position-btn btn-card")
-    applicantButtonA.setAttribute("style", "height:50px; line-height:35px;")
-    applicantButtonA.addEventListener('click', function() {
-        sessionStorage.setItem("cleanPositionId", `${position["positionClass"]}: ${position["positionType"]}`)
-        sessionStorage.setItem("positionId", `[${position["positionClass"]}][${position["positionType"]}]`)
-    })
+  let applicantButtonAText = document.createTextNode("See Applicants");
 
-    notesLabel.setAttribute("class", "card-title float-start")
+  applicantButtonA.setAttribute("id", `seebutton_${cleanPositionId}`);
+  applicantButtonA.setAttribute("href", "../admin_pages/applications.html");
+  applicantButtonA.setAttribute("value", "");
+  applicantButtonA.setAttribute("class", "mt-2 btn open-position-btn btn-card");
+  applicantButtonA.setAttribute("style", "height:50px; line-height:35px;");
+  applicantButtonA.addEventListener("click", function () {
+    sessionStorage.setItem(
+      "cleanPositionId",
+      `${position["positionClass"]}: ${position["positionType"]}`
+    );
+    sessionStorage.setItem(
+      "positionId",
+      `[${position["positionClass"]}][${position["positionType"]}]`
+    );
+  });
 
-    notesDiv.setAttribute("class", "notes-wrapper admin-notes")
-    notesSpan.setAttribute("id", `notes_${cleanPositionId}`)
-    
-    div.setAttribute("class", "card mb-3 class-card")
-    div.setAttribute("id", `card_${cleanPositionId}`)
+  notesLabel.setAttribute("class", "card-title float-start");
 
-    a.setAttribute("id", `title_${cleanPositionId}`)
-    a.setAttribute("data-bs-toggle", "collapse")
-    a.setAttribute("data-bs-target", `#collapse_${cleanPositionId}`)
+  notesDiv.setAttribute("class", "notes-wrapper admin-notes");
+  notesSpan.setAttribute("id", `notes_${cleanPositionId}`);
 
-	h5.setAttribute("class","card-header target");
-	span1.setAttribute("id", `${cleanPositionId}_class`)
-	span2.setAttribute("id", `${cleanPositionId}_semester`)
-	span3.setAttribute("class","float-end right-card-title")
-	span3.setAttribute("id", `${cleanPositionId}_applicants`)
-    span4.setAttribute("id", `${cleanPositionId}_degree`)
+  div.setAttribute("class", "card mb-3 class-card");
+  div.setAttribute("id", `card_${cleanPositionId}`);
 
-    /*
+  a.setAttribute("id", `title_${cleanPositionId}`);
+  a.setAttribute("data-bs-toggle", "collapse");
+  a.setAttribute("data-bs-target", `#collapse_${cleanPositionId}`);
+
+  h5.setAttribute("class", "card-header target");
+  span1.setAttribute("id", `${cleanPositionId}_class`);
+  span2.setAttribute("id", `${cleanPositionId}_semester`);
+  span3.setAttribute("class", "float-end right-card-title");
+  span3.setAttribute("id", `${cleanPositionId}_applicants`);
+  span4.setAttribute("id", `${cleanPositionId}_degree`);
+
+  /*
                     <a id="seebutton" href="" value="" class="mt-2 btn open-position-btn btn-card"
                         style="height:50px; line-height:35px;">See Applicants</a>
                     <div class="mt-2 open-position-input-group input-group float-end">
@@ -227,108 +275,125 @@ function displayPosition(position) {
                     <br>
                     */
 
-    let collapseDiv = createCollapseDiv(cleanPositionId)
-    let positionLabel = createPositionLabel(cleanId, position["positionType"])
-    let editNotesButton = createEditNotesButton(position)
-    let closePositionButton = createClosePositionButton(position)
-    let notesAndPositionDiv = createEditNotesAndClosePositionDiv()
+  let collapseDiv = createCollapseDiv(cleanPositionId);
+  let positionLabel = createPositionLabel(cleanId, position["positionType"]);
+  let editNotesButton = createEditNotesButton(position);
+  let closePositionButton = createClosePositionButton(position);
+  let notesAndPositionDiv = createEditNotesAndClosePositionDiv();
 
-    notesAndPositionDiv.appendChild(editNotesButton)
-    notesAndPositionDiv.appendChild(closePositionButton)
+  notesAndPositionDiv.appendChild(editNotesButton);
+  notesAndPositionDiv.appendChild(closePositionButton);
 
+  collapseDiv.appendChild(positionLabel);
+  collapseDiv.appendChild(br);
 
-    collapseDiv.appendChild(positionLabel)
-    collapseDiv.appendChild(br)
+  notesLabel.appendChild(noteLabelText);
+  collapseDiv.appendChild(notesLabel);
 
-    notesLabel.appendChild(noteLabelText)
-    collapseDiv.appendChild(notesLabel)
+  notesDiv.appendChild(notesSpan);
+  notesSpan.appendChild(noteSpanText);
+  collapseDiv.appendChild(notesDiv);
 
-    notesDiv.appendChild(notesSpan)
-    notesSpan.appendChild(noteSpanText)
-    collapseDiv.appendChild(notesDiv)
+  applicantButtonA.appendChild(applicantButtonAText);
+  collapseDiv.appendChild(applicantButtonA);
 
-    applicantButtonA.appendChild(applicantButtonAText)
-    collapseDiv.appendChild(applicantButtonA)
+  collapseDiv.appendChild(notesAndPositionDiv);
 
-    collapseDiv.appendChild(notesAndPositionDiv)
+  mainDiv.appendChild(div);
+  div.append(a);
+  div.append(collapseDiv);
 
+  a.appendChild(h5);
 
-    mainDiv.appendChild(div)
-    div.append(a)
-    div.append(collapseDiv)
+  h5.appendChild(span1);
+  span1.appendChild(positionClass);
 
-    a.appendChild(h5)
+  h5.appendChild(leftParenthesis);
+  h5.appendChild(span2);
+  span2.appendChild(positionSemester);
 
-    h5.appendChild(span1)
-    span1.appendChild(positionClass)
+  h5.appendChild(rightParenthesis);
 
-    h5.appendChild(leftParenthesis)
-    h5.appendChild(span2)
-    span2.appendChild(positionSemester)
+  h5.appendChild(span4);
+  span4.appendChild(standingRequired);
 
-    h5.appendChild(rightParenthesis)
-
-    h5.appendChild(span4)
-    span4.appendChild(standingRequired)
-
-    h5.appendChild(span3)
-    span3.appendChild(applicantCount)
+  h5.appendChild(span3);
+  span3.appendChild(applicantCount);
 }
 
 function deconstructPositionId(modifiedPositionId) {
-    let positionClass = ""
-    let positionType = ""
-    let i = 1;
-    while(true) {
-        if(modifiedPositionId[i] == ']') {
-            break
-        }
-        positionClass += modifiedPositionId[i]
-        i++
+  let positionClass = "";
+  let positionType = "";
+  let i = 1;
+  while (true) {
+    if (modifiedPositionId[i] == "]") {
+      break;
     }
-    i += 2
-    while(true) {
-        if(modifiedPositionId[i] == ']') {
-            break
-        }
-        positionType += modifiedPositionId[i]
-        i++
+    positionClass += modifiedPositionId[i];
+    i++;
+  }
+  i += 2;
+  while (true) {
+    if (modifiedPositionId[i] == "]") {
+      break;
     }
+    positionType += modifiedPositionId[i];
+    i++;
+  }
 
-    return [positionClass, positionType]
+  return [positionClass, positionType];
 }
 
-window.onload = function() {
-    displayAllPositions()
-    makeFilterRadioButtonsDeselectable()
+window.onload = function () {
+  displayAllPositions();
+  makeFilterRadioButtonsDeselectable();
 
-    document.getElementById("edit_notes_modal_button").addEventListener('click', async function(e) {
-        let id = deconstructPositionId(sessionStorage.getItem("positionId"))
-        let newNote = document.getElementById("edit_notes_modal_text_area").value
+  document
+    .getElementById("edit_notes_modal_button")
+    .addEventListener("click", async function (e) {
+      let id = deconstructPositionId(sessionStorage.getItem("positionId"));
+      let newNote = document.getElementById("edit_notes_modal_text_area").value;
 
-        let response = await updateNotesOfPosition(id[0], id[1], {notes: newNote})
+      let response = await updateNotesOfPosition(
+        id[0],
+        id[1],
+        { notes: newNote },
+        sessionStorage.getItem("jwtToken")
+      );
 
-        let editNotesModal = bootstrap.Modal.getInstance(document.getElementById('edit_notes_modal'))
-        editNotesModal.hide()
-        location.reload()
-    })
+      let editNotesModal = bootstrap.Modal.getInstance(
+        document.getElementById("edit_notes_modal")
+      );
+      editNotesModal.hide();
+      location.reload();
+    });
 
-    document.getElementById("close_confirmation_button").addEventListener('click', async function(e) {
-        let id = deconstructPositionId(sessionStorage.getItem("positionId"))
-        console.log(id)
+  document
+    .getElementById("close_confirmation_button")
+    .addEventListener("click", async function (e) {
+      let id = deconstructPositionId(sessionStorage.getItem("positionId"));
+      console.log(id);
 
-        let response = await deletePosition(id[0], id[1])
-        let closeConfirmationModal = bootstrap.Modal.getInstance(document.getElementById("close_confirmation_modal"))
+      let response = await deletePosition(
+        id[0],
+        id[1],
+        sessionStorage.getItem("jwtToken")
+      );
+      let closeConfirmationModal = bootstrap.Modal.getInstance(
+        document.getElementById("close_confirmation_modal")
+      );
 
-        closeConfirmationModal.hide()
-        location.reload()
-    })
+      closeConfirmationModal.hide();
+      location.reload();
+    });
 
-    document.getElementById("filterButton").addEventListener('click', function(e) {
-        document.getElementById("sample").replaceChildren()
-        displayAllPositions()
-    })
-}
+  document
+    .getElementById("filterButton")
+    .addEventListener("click", function (e) {
+      document.getElementById("sample").replaceChildren();
+      displayAllPositions();
+    });
+};
 
 // function Search() {
 //   var input = document.getElementById("Search");
@@ -358,18 +423,17 @@ window.onload = function() {
 // 	var pos="";
 // 	var semesters="";
 // 	var grad="";
-	
+
 //     var majorcheckboxes = document.getElementsByClassName('major-checkbox');
 // 	var poscheckboxes = document.getElementsByClassName('pos-checkbox');
 // 	var semestercheckboxes = document.getElementsByClassName('semester-checkbox');
 // 	var gradcheckboxes = document.getElementsByClassName('grad-checkbox');
-	
+
 // 	majors = filterField(majorcheckboxes);
 // 	pos = filterField(poscheckboxes);
 // 	semesters = filterField(semestercheckboxes);
 // 	grad = filterField(gradcheckboxes);
-	
-	
+
 // 	if(typeof getPagetype === "function"){
 // 		var appcheckboxes = document.getElementsByClassName('app-checkbox');
 // 		var app = filterField(appcheckboxes);
@@ -379,16 +443,16 @@ window.onload = function() {
 // 		var classes = "";
 // 		var list=[];
 // 		var counter = 0;
-		
+
 // 		var chekboxInputs = Array.from(checkboxes).map(a => a.querySelector('input'));
-		
+
 // 		var allAreUnselected = chekboxInputs.every(function(elem){
 // 			return !elem.checked;
 // 		});
 // 		if(allAreUnselected){
 // 			chekboxInputs.forEach(function(input){
 // 				if(input){
-// 					list[counter] = input.getAttribute("value"); 
+// 					list[counter] = input.getAttribute("value");
 // 					counter++;
 // 					addFilter(list);
 // 				}
@@ -397,13 +461,12 @@ window.onload = function() {
 // 		else {
 // 			chekboxInputs.forEach(function(input){
 // 				if(input.checked){
-// 					list[counter] = input.getAttribute("value"); 
+// 					list[counter] = input.getAttribute("value");
 // 					counter++;
 // 					addFilter(list);
 // 				}
 // 			});
 // 		}
-
 
 // 		function addFilter(list){
 // 			classes = ":not(";
@@ -411,24 +474,24 @@ window.onload = function() {
 // 				classes+="."+list[i];
 // 				if(i!==list.length-1)
 // 					classes+=","
-// 			}		
+// 			}
 // 		}
 // 		classes+=")"
-		
+
 // 		return classes;
 // 	}
-	
+
 // 	filters=majors+", "+pos+", "+semesters+", "+grad
-	
+
 // 	if(typeof getPagetype === "function")
 // 		filters+=", "+app;
-	
+
 // 	$('.all').show().filter(filters).hide();
 // }
 
 // function uncheck(ele){
 // 	var classes =  ele.classList;
-// 	 $('input.'+classes[1]).not(ele).prop('checked', false); 
+// 	 $('input.'+classes[1]).not(ele).prop('checked', false);
 // }
 
 // function collapseCards(value){
