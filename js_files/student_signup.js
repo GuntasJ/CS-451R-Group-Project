@@ -28,6 +28,13 @@ function areAllFieldsOccupied() {
   return firstName != "" && lastName != "" && email != "" && password != "";
 }
 
+function arePasswordsSame() {
+  return (
+    document.getElementById("password").value ==
+    document.getElementById("confirm_password").value
+  );
+}
+
 async function addSignupOnButton() {
   document
     .getElementById("signup")
@@ -37,6 +44,11 @@ async function addSignupOnButton() {
         console.log("Fields empty!!!");
         return;
       }
+
+      if (!arePasswordsSame()) {
+        return;
+      }
+
       let studentAccountObject = createStudentObjectFromArray(
         getStudentSignupInfo()
       );
