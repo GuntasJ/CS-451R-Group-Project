@@ -3,167 +3,184 @@
 <html>
 
 <head>
- <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css_files/application.css">
     <link rel="stylesheet" type="text/css" href="../css_files/dashboard.css">
-        <link rel="icon" href="https://www.umkc.edu/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://www.umkc.edu/global-assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <link href="https://www.umkc.edu/global-assets/css/bootstrap/bootstrap-grid.min.css" rel="stylesheet">
-        <link href="https://www.umkc.edu/global-assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://www.umkc.edu/global-assets/css/global.css" rel="stylesheet">
-        <title>Student Home</title>
-       </head>
+    <link rel="icon" href="https://www.umkc.edu/favicon.ico">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://www.umkc.edu/global-assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="https://www.umkc.edu/global-assets/css/bootstrap/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="https://www.umkc.edu/global-assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://www.umkc.edu/global-assets/css/global.css" rel="stylesheet">
+    <title>Student Home</title>
+</head>
 
 
 <body>
     <!-- header -->
+    <script type="module" src="../js_files/student_dashboard.js"></script>
     <div class="container-fluid sd-top-header bg-umkc-blue header-blue-strips" id="header">
         <div class="row p-2">
-        <div class="col-lg-6 align-self-center">
-        <h1 class="text-md-left text-center"><a class="text-white font-weight-bold" href="https://www.umkc.edu/">University of Missouri-Kansas city</a></h1>
+            <div class="col-lg-6 align-self-center">
+                <h1 class="text-md-left text-center"><a class="text-white font-weight-bold"
+                        href="https://www.umkc.edu/">University of Missouri-Kansas city</a></h1>
+            </div>
+            <div class="col-lg-6 align-self-center text-md-left text-center">
+            </div>
         </div>
-        <div class="col-lg-6 align-self-center text-md-left text-center">
-        </div>
-        </div>
-        </div>
+    </div>
     <!-- umkc logo and website name -->
-        <div class="container-fluid sd-site-header-container bg-umkc-blue">
-            <div class="row">
-                <div class="logo text-md-left text-center">
-                    <a class="navbar-brand" href="../main_pages/UMKC Main.html"> 
-                        <img alt="UMKC Logo" class="img-fluid" src="https://www.umkc.edu/global-assets/images/UMKC_white_cropped.png" title="University of Missouri-Kansas City - Home.">
-                    </a>
-                </div>
-                <div class="sd-header-text">
-                    <h2 class="text-white text-md-left text-center"><span class="sd-site-header-subtext"></span><br>
-                    <a class="text-white" href="">Student Home</a></h2>
-                </div>
+    <div class="container-fluid sd-site-header-container bg-umkc-blue">
+        <div class="row">
+            <div class="logo text-md-left text-center">
+                <a class="navbar-brand" href="../main_pages/UMKC Main.html">
+                    <img alt="UMKC Logo" class="img-fluid"
+                        src="https://www.umkc.edu/global-assets/images/UMKC_white_cropped.png"
+                        title="University of Missouri-Kansas City - Home.">
+                </a>
+            </div>
+            <div class="sd-header-text">
+                <h2 class="text-white text-md-left text-center"><span class="sd-site-header-subtext"></span><br>
+                    <a class="text-white" href="">Student Home</a>
+                </h2>
             </div>
         </div>
-        <br>
-        <div class="logout-class">
-            <a id="logout"  href="../signup_pages/student_signup.html" class="btn btn-apply float-end">Logout</a>
+    </div>
+    <br>
+    <div class="logout-class">
+        <a id="logout" href="../signup_pages/student_signup.html" class="btn btn-apply float-end">Logout</a>
+    </div>
+
+
+    <div class="management">
+        <div class="welcome_student">
+            <h2 id="student-name">Welcome, Student</h2>
+            <h61>Welcome to your very own dashboard! This will serve as a place where you can
+                check the status of your applications or create a new one!
+            </h61>
+            &nbsp;</p>
+            <hr>
         </div>
 
 
-        <div class="management">
-            <div class="welcome_student">
-                <h2>Welcome, Student</h2>
-                <h61>Welcome to your very own dashboard! This will serve as a place where you can 
-                    check the status of your applications or create a new one!
-                </h61>
-                &nbsp;</p><hr>
-            </div>
 
-        
-        
 
-    
+
         <h30>Apply Now </h30>
         <br>
         <br>
-        <a href="../student_pages/create-account.html"> 
-            <h64>New Application </h64> 
+        <a href="../student_pages/create_application.html">
+            <h64>New Application </h64>
 
         </a>
         <!-- Application status  -->
-        <hr><p><br><strong></strong>&nbsp;
-            <div class ="application-management">
-            <table class="umkc-table">
+        <hr>
+        <p><br><strong></strong>&nbsp;
+        <div class="application-management">
+            <table class="umkc-table" id="dashboard-table">
                 <h30>Application Status</h30>
                 <thead>
                     <tr>
                         <th>Course Number</th>
-                        <th>Application Form</th>
+                        <th>Position Type</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>In Progress</td>
-                        <td>
-                            <div class="umkc-delete-application">
-                                <button type="submit" class="delete-button">
-                                    🗑️ 
-                                </button>
-                    </td>
-                        </div>
-                            </tr>
-                </tbody>
-            </table>
+
         </div>
-        &nbsp;</p><hr>
+
+        </tbody>
+        </table>
     </div>
-<!--FOOTER-->
-            <footer>  
-         
-                <!-- <div class="container-fluid"> -->
-                    <!-- Footer Bottom -->
-                    <div class="row">
-                        <div class="col-lg-12 footer-bottom bg-umkc-blue">
-                            <div class="row">				
-                                <div class="col-xl-3 col-lg-6 col-md-6 footer-bottom-img">
-                                    <a href="https://www.umkc.edu/index.html">
-                                        <img alt="University of Missouri-Kansas City - home." class="img-fluid" src="https://www.umkc.edu/global-assets/images/umkc_white_cropped2.png">
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-md-6 py-md-3">
-                                    <p class="blue-border-left">
-                                        <a class="text-white" href="https://www.umkc.edu/about/maps.html">Location and Maps</a>
-                                        <br>
-                                        <a class="text-white" href="https://www.umkc.edu/calendar/">Campus Calendar</a>
-                                        <br>
-                                        <a class="text-white" href="https://www.umkc.edu/az-index.html">A-Z Index</a>
-                                        <br>
-                                        <a class="text-white" href="https://info.umkc.edu/hr/careers/">Jobs</a>
-                                        <br>
-                                        <a class="text-white" href="https://net3.umkc.edu/intapps/lookup">Directory</a>
-                                    </p>									
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-md-6 py-md-3">
-                                    <p class="blue-border-left">
-                                        <a class="text-white" href="https://info.umkc.edu/diversity/">Diversity and Inclusion</a>
-                                        <br>
-                                        <a class="text-white" href="https://library.umkc.edu/">Libraries</a>
-                                        <br>
-                                        <a class="text-white" href="https://info.umkc.edu/help/">Help Central</a>
-                                        <br>
-                                        <a class="text-white" href="https://www.umkc.edu/registrar/forms-resources/student-resources/consumer-information.html">Consumer Information</a>
-                                        <br>
-                                        <a class="text-white" href="https://info.umkc.edu/accreditation/">Accreditation</a>
-                                    </p>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-md-6 py-md-3 py-1">
-                                    <p class="text-white font-weight-bold">
-                                        <a class="text-white" href="https://www.umkc.edu/email/">Webmail</a>
-                                        <br>
-                                        <a class="text-white" href="https://umkc.umsystem.edu/">Pathway</a>
-                                        <br>
-                                        <a class="text-white" href="https://umsystem.instructure.com/">Canvas</a>
-                                        <br>
-                                        <a class="text-white" href="https://umkc.starfishsolutions.com/starfish-ops/support/login.html">UMKC Connect</a>
-                                        <br>
-                                        <a class="text-white" href="https://myroo.umkc.edu/">MyRoo</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 text-white py-3 py-md-1">
-                                    <p class="curator"><a href="https://www.umsystem.edu/">© 2023 Curators of the University of Missouri</a> | <a href="https://www.umkc.edu/disability-resources.html">Disability Resources</a> | <a href="https://www.umkc.edu/privacy-policy/index.html">Privacy Policy</a> | <a href="https://www.umsystem.edu/ums/copyright/">DMCA Policy</a> | <a href="https://www.umkc.edu/submit-a-web-ticket.html">Issues with this website?</a> | <a href="https://cms.umkc.edu/entity/open.act?id=2464e182ac1e04cd27194b3dba961c5e&amp;type=page&amp;action=edit">Editor Access</a></p>
-                                    <p class="curator">UMKC is an equal opportunity/access/affirmative action/pro-disability and veteran employer and does not discriminate on the basis of sex in our education programs or activities, pursuant to Title IX and 34 CFR Part 106. For more information, visit our <a href="https://www.umkc.edu/nondiscrimination.html">UMKC Statement of Nondiscrimination</a>.</p>
-                                </div>
-                            </div>
-                        </div>
+    &nbsp;</p>
+    <hr>
+    </div>
+    <!--FOOTER-->
+    <footer>
+
+        <!-- <div class="container-fluid"> -->
+        <!-- Footer Bottom -->
+        <div class="row">
+            <div class="col-lg-12 footer-bottom bg-umkc-blue">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-md-6 footer-bottom-img">
+                        <a href="https://www.umkc.edu/index.html">
+                            <img alt="University of Missouri-Kansas City - home." class="img-fluid"
+                                src="https://www.umkc.edu/global-assets/images/umkc_white_cropped2.png">
+                        </a>
                     </div>
-                    <!-- Footer Bottom End-->
-                </div></footer>
-    </body>
+                    <div class="col-xl-3 col-lg-6 col-md-6 py-md-3">
+                        <p class="blue-border-left">
+                            <a class="text-white" href="https://www.umkc.edu/about/maps.html">Location and Maps</a>
+                            <br>
+                            <a class="text-white" href="https://www.umkc.edu/calendar/">Campus Calendar</a>
+                            <br>
+                            <a class="text-white" href="https://www.umkc.edu/az-index.html">A-Z Index</a>
+                            <br>
+                            <a class="text-white" href="https://info.umkc.edu/hr/careers/">Jobs</a>
+                            <br>
+                            <a class="text-white" href="https://net3.umkc.edu/intapps/lookup">Directory</a>
+                        </p>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 py-md-3">
+                        <p class="blue-border-left">
+                            <a class="text-white" href="https://info.umkc.edu/diversity/">Diversity and Inclusion</a>
+                            <br>
+                            <a class="text-white" href="https://library.umkc.edu/">Libraries</a>
+                            <br>
+                            <a class="text-white" href="https://info.umkc.edu/help/">Help Central</a>
+                            <br>
+                            <a class="text-white"
+                                href="https://www.umkc.edu/registrar/forms-resources/student-resources/consumer-information.html">Consumer
+                                Information</a>
+                            <br>
+                            <a class="text-white" href="https://info.umkc.edu/accreditation/">Accreditation</a>
+                        </p>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 py-md-3 py-1">
+                        <p class="text-white font-weight-bold">
+                            <a class="text-white" href="https://www.umkc.edu/email/">Webmail</a>
+                            <br>
+                            <a class="text-white" href="https://umkc.umsystem.edu/">Pathway</a>
+                            <br>
+                            <a class="text-white" href="https://umsystem.instructure.com/">Canvas</a>
+                            <br>
+                            <a class="text-white"
+                                href="https://umkc.starfishsolutions.com/starfish-ops/support/login.html">UMKC
+                                Connect</a>
+                            <br>
+                            <a class="text-white" href="https://myroo.umkc.edu/">MyRoo</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-white py-3 py-md-1">
+                        <p class="curator"><a href="https://www.umsystem.edu/">© 2023 Curators of the University of
+                                Missouri</a> | <a href="https://www.umkc.edu/disability-resources.html">Disability
+                                Resources</a> | <a href="https://www.umkc.edu/privacy-policy/index.html">Privacy
+                                Policy</a> | <a href="https://www.umsystem.edu/ums/copyright/">DMCA Policy</a> | <a
+                                href="https://www.umkc.edu/submit-a-web-ticket.html">Issues with this website?</a> | <a
+                                href="https://cms.umkc.edu/entity/open.act?id=2464e182ac1e04cd27194b3dba961c5e&amp;type=page&amp;action=edit">Editor
+                                Access</a></p>
+                        <p class="curator">UMKC is an equal opportunity/access/affirmative action/pro-disability and
+                            veteran employer and does not discriminate on the basis of sex in our education programs or
+                            activities, pursuant to Title IX and 34 CFR Part 106. For more information, visit our <a
+                                href="https://www.umkc.edu/nondiscrimination.html">UMKC Statement of
+                                Nondiscrimination</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End-->
+        </div>
+    </footer>
+</body>
 
 </html>

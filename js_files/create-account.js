@@ -1,4 +1,8 @@
-import { addNewApplicationWithFile, uploadFile } from "./restapi.js";
+import {
+  addNewApplicationWithFile,
+  uploadFile,
+  findUserByEmail,
+} from "./restapi.js";
 
 function getAllApplicationInformationFromPage() {
   let firstName = document.getElementById("first_name").value;
@@ -77,15 +81,23 @@ window.addEventListener("load", function () {
         sessionStorage.getItem("jwtToken")
       );
       let fileId = response["id"];
-      console.log(fileId);
+
+      let userResponse = await findUserByEmail(
+        sessionStorage.getItem("logged_in_student_email"),
+        sessionStorage.getItem("jwtToken")
+      );
+      let user = await userResponse.json();
+
+      console.log(user);
 
       let response1 = await addNewApplicationWithFile(
         createApplicationObjectFromArrayWithoutId(applicationInfo),
         fileId,
+        user["id"],
         sessionStorage.getItem("jwtToken")
       );
       console.log(response1);
 
-      //location.reload()
+      location.href = "../student_pages/student_dashboard.html";
     });
 });

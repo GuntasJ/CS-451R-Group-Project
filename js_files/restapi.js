@@ -60,6 +60,37 @@ const baseApiPath = "http://localhost:8080/tags/api/v1";
 //     })
 // }
 
+export async function signupNewStudentAccount(student) {
+  const response = await fetch(`${baseApiPath}/auth/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(student),
+  });
+  return response;
+}
+
+export async function loginUser(user) {
+  const response = await fetch(`${baseApiPath}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+  return response;
+}
+
+export async function findUserByEmail(email, token) {
+  const response = await fetch(`${baseApiPath}/user/${email}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
 //Positions API
 
 export async function getAllPositions(token) {
@@ -168,9 +199,14 @@ export async function addNewApplication(application, token) {
   return data;
 }
 
-export async function addNewApplicationWithFile(application, fileId, token) {
+export async function addNewApplicationWithFile(
+  application,
+  fileId,
+  studentId,
+  token
+) {
   const response = await fetch(
-    `${baseApiPath}/applications?file_id=${fileId}`,
+    `${baseApiPath}/applications?file_id=${fileId}&student_id=${studentId}`,
     {
       method: "POST",
       headers: {

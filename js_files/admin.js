@@ -6,10 +6,10 @@ import {
 
 async function displayAllPositions() {
   const positions = await getAllPositions(sessionStorage.getItem("jwtToken"));
-  const filteredPositions = filterPositions(positions);
+  //const filteredPositions = filterPositions(positions);
 
-  for (let i = 0; i < filteredPositions.length; i++) {
-    displayPosition(filteredPositions[i]);
+  for (let i = 0; i < positions.length; i++) {
+    displayPosition(positions[i]);
   }
 }
 
@@ -42,17 +42,17 @@ function filterPositions(positions) {
   }
 
   //semester
-  if (document.getElementById("fall-checkbox").checked) {
+  if (document.getElementById("Fall").checked) {
     filteredPositions = filteredPositions.filter((position) =>
       position["semesters"].includes("Fall")
     );
   }
-  if (document.getElementById("spring-checkbox").checked) {
+  if (document.getElementById("Spring").checked) {
     filteredPositions = filteredPositions.filter((position) =>
       position["semesters"].includes("Spring")
     );
   }
-  if (document.getElementById("summer-checkbox").checked) {
+  if (document.getElementById("Summer").checked) {
     filteredPositions = filteredPositions.filter((position) =>
       position["semesters"].includes("Summer")
     );
