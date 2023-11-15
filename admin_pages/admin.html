@@ -42,13 +42,12 @@
     <div class="mb-3 p-3 card filter card-filter sticky-left">
         <label style="font-weight: bold;">Major:</label>
         <div class="form-check" id="test">
-            <label class="checkbox form-check-label major-checkbox"><input class="form-check-input major"
-                    type="checkbox" id="CS" value="CS" />CS</label><br>
-            <label class="checkbox form-check-label major-checkbox"><input class="form-check-input major"
-                    type="checkbox" id="IT" value="IT" />IT</label><br>
-                    <label class="checkbox form-check-label major-checkbox"><input class="form-check-input major"
-                        type="checkbox" id="ECE" value="ECE" />ECE</label><br>
-            
+            <label class="checkbox form-check-label pos-checkbox"><input class="form-check-input position"
+                    type="radio" id="CS" value="CS" name="position_button" />CS</label><br>
+            <label class="checkbox form-check-label pos-checkbox"><input class="form-check-input position"
+                    type="radio" id="IT" value="IT" name="position_button" />IT</label><br>
+            <label class="checkbox form-check-label pos-checkbox"><input class="form-check-input position"
+                    type="radio" id="ECE" value="ECE" name="position_button" checked/>ECE</label><br>
         </div>
         <label class="mt-2" style="font-weight: bold;">Position:</label>
         <div class="form-check">
@@ -61,12 +60,12 @@
         </div>
         <label class="mt-2" style="font-weight: bold;">Semester:</label>
         <div class="form-check">
-            <label class="checkbox form-check-label semester-checkbox"><input class="form-check-input semester"
-                    type="checkbox" id="fall-checkbox" value="Fall" />Fall</label><br>
-            <label class="checkbox form-check-label semester-checkbox"><input class="form-check-input semester"
-                    type="checkbox" id="spring-checkbox" value="Spring" />Spring</label><br>
-            <label class="checkbox form-check-label semester-checkbox"><input class="form-check-input semester"
-                    type="checkbox" id="summer-checkbox" value="Summer" />Summer</label><br>
+            <label class="checkbox form-check-label pos-checkbox"><input class="form-check-input position"
+                    type="radio" id="Fall" value="Fall" name="position_button" />Fall</label><br>
+            <label class="checkbox form-check-label pos-checkbox"><input class="form-check-input position"
+                    type="radio" id="Spring" value="Spring" name="position_button" />Spring</label><br>
+            <label class="checkbox form-check-label pos-checkbox"><input class="form-check-input position"
+                    type="radio" id="Summer" value="Summer" name="position_button" checked/>Summer</label><br>
         </div>
         <label class="mt-2" style="font-weight: bold;">Standing:</label>
         <div class="form-check">
@@ -84,6 +83,8 @@
                     </div>
                     
         <button id="filterButton">Filter</button>
+        <br>
+        <button id="resetFilter"> Reset Filter</button>
     </div>   
 
     <div class="row open-position-container" id="open-position-container">

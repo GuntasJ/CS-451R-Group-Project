@@ -812,5 +812,12 @@ a{
   border: none;
   cursor: pointer;
 }
-
+#resetFilter {
+  display: block;
+  padding: 8px;
+  background-color: #58181F;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 
