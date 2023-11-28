@@ -1,5 +1,7 @@
 import { getPositionById } from "./restapi.js";
 
+let selectedRows = new Set();
+
 function getReferenceToTableBody() {
   let tableBody = document
     .getElementById("sortTable")
@@ -59,7 +61,13 @@ async function addStudentRows() {
     let cell9 = row.insertCell();
 
     row.addEventListener("click", function (e) {
-      console.log("Row was clicked " + cell1.textContent);
+      if (!selectedRows.has(i)) {
+        selectedRows.add(i);
+      } else {
+        selectedRows.delete(i);
+      }
+      this.classList.toggle("selected-row");
+      console.log(selectedRows);
     });
 
     cell1.innerHTML = applicationList[i]["studentId"];
@@ -99,6 +107,19 @@ async function addStudentRows() {
 window.addEventListener("load", async function () {
   document.getElementById("position_id").innerHTML =
     sessionStorage.getItem("cleanPositionId");
-
   await addStudentRows();
+
+  this.document
+    .getElementById("approve-button")
+    .addEventListener("click", function (e) {
+      console.log(`Approved the following: ${selectedRows}`);
+      console.log(selectedRows);
+    });
+
+  this.document
+    .getElementById("reject-button")
+    .addEventListener("click", function (e) {
+      console.log(`Rejected the following: ${selectedRows}`);
+      console.log(selectedRows);
+    });
 });
