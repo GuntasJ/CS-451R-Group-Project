@@ -58,6 +58,10 @@ async function addStudentRows() {
     let cell8 = row.insertCell();
     let cell9 = row.insertCell();
 
+    row.addEventListener("click", function (e) {
+      console.log("Row was clicked " + cell1.textContent);
+    });
+
     cell1.innerHTML = applicationList[i]["studentId"];
     cell2.innerHTML =
       applicationList[i]["firstName"] + " " + applicationList[i]["lastName"];
