@@ -8,11 +8,14 @@ async function displayAllPositions(filtered) {
   const positions = await getAllPositions(sessionStorage.getItem("jwtToken"));
   const filteredPositions = filterPositions(positions);
 
-  for (let i = 0; i < positions.length; i++) {
-    if (filtered) {
-      displayPosition(filteredPositions[i]);
-    } else {
-      displayPosition(positions[i]);
+  if (filtered) {
+    for (let filteredPosition of filteredPositions) {
+      displayPosition(filteredPosition);
+    }
+  } else {
+    console.log(positions.length);
+    for (let position of positions) {
+      displayPosition(position);
     }
   }
 }
