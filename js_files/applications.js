@@ -122,7 +122,7 @@ async function addStudentRows() {
     let cell5 = document.createElement("td");
     let cell6 = document.createElement("td");
     let cell7 = document.createElement("td");
-    let cell8 = document.createElement("td");
+    //let cell8 = document.createElement("td");
     let cell9 = document.createElement("td");
     let cell10 = document.createElement("td");
 
@@ -143,7 +143,7 @@ async function addStudentRows() {
     cell5.innerHTML = applicationList[i]["currentMajor"];
     cell6.innerHTML = applicationList[i]["umkcGPA"];
     cell7.innerHTML = applicationList[i]["hoursDoneAtUmkc"];
-    cell8.innerHTML = "TODO";
+    //cell8.innerHTML = "TODO";
 
     cell3.setAttribute("class", "overflow-auto");
 
@@ -172,7 +172,7 @@ async function addStudentRows() {
     row.appendChild(cell5);
     row.appendChild(cell6);
     row.appendChild(cell7);
-    row.appendChild(cell8);
+    //row.appendChild(cell8);
     row.appendChild(cell9);
     row.appendChild(cell10);
 
