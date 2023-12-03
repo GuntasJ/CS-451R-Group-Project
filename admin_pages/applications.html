@@ -88,7 +88,7 @@
 		</div>
 	</div>
 
-	<div class="applicant-container container applicantspage my-5" style="font-size: 90%;">
+	<div class="applicant-container container applicantspage my-5" id="table-container" style="font-size: 90%;">
 		<table class="table table-hover text-wrap" id="sortTable" style="table-layout: fixed; width: 100%;">
 			<h3 class="mb-3" id="position_id">Position</h3>
 			<div>
@@ -116,19 +116,33 @@
 									name="lev" value="PhD">PhD</label>
 						</div>
 					</div>
+
+					<div class="filter-phone" style="display:inline-flex ;">
+						<label class="ps-3 filter-label pe-3">Status:</label>
+						<div class="form-check" id="status">
+							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
+									name="status" value="Pending" id="pending-status" checked>Pending</label>
+							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
+									name="status" value="Approved" id="approved-status" checked>Approved</label>
+							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
+									name="status" value="Rejected" id="rejected-status" checked>Rejected</label>
+						</div>
+					</div>
+
 				</div>
 				<div>
 					<thead>
 						<tr>
-							<th style="width: 11%;" scope="col">Student Id</th>
-							<th style="width: 11%;" scope="col">Name</th>
-							<th style="width: 11%;" scope="col">Email</th>
-							<th style="width: 11%;" scope="col">Standing</th>
-							<th style="width: 11%;" scope="col">Major</th>
-							<th style="width: 11%;" scope="col">GPA</th>
-							<th style="width: 11%;" scope="col">Hours</th>
-							<th style="width: 11%;" scope="col">GTA Status</th>
-							<th style="width: 11%;" scope="col">Documents</th>
+							<th style="width: 10%;" scope="col">Student Id</th>
+							<th style="width: 10%;" scope="col">Name</th>
+							<th style="width: 10%;" scope="col">Email</th>
+							<th style="width: 10%;" scope="col">Standing</th>
+							<th style="width: 10%;" scope="col">Major</th>
+							<th style="width: 10%;" scope="col">GPA</th>
+							<th style="width: 10%;" scope="col">Hours</th>
+							<th style="width: 10%;" scope="col">GTA Status</th>
+							<th style="width: 10%;" scope="col">Documents</th>
+							<th style="width: 10%;" scope="col">Application Status</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -142,6 +156,7 @@
 			<a href="admin.html" class="mt-4 btn btn-back submit-btn "><i class="bi bi-arrow-left float-start"></i></a>
 			<button id="approve-button" class="mt-4 btn submit-btn float-end">Approve</button>
 			<button id="reject-button" class="mt-4 me-4 btn submit-btn float-end">Reject</button>
+			<button id="revert-button" class="mt-4 me-4 btn submit-btn float-end">Revert</button>
 		</div>
 	</div>
 

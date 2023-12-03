@@ -1,58 +1,61 @@
 .umkc-table {
-    border-collapse: collapse;
-    width: 80%;
-    margin: 10px auto;
+  border-collapse: collapse;
+  width: 80%;
+  margin: 10px auto;
 }
 
-.umkc-table th, .umkc-table td {
-    border: 1px solid #002D72; /* UMKC blue color */
-    padding: 10px;
-    text-align: center;
+.umkc-table th,
+.umkc-table td {
+  border: 1px solid #002d72; /* UMKC blue color */
+  padding: 10px;
+  text-align: center;
 }
 
 .umkc-table th {
-    background-color: #002D72; /* UMKC blue color for table headers */
-    color: #fff; /* White text color */
+  background-color: #002d72; /* UMKC blue color for table headers */
+  /* color: #fff; White text color */
 }
 
 .umkc-table tr:nth-child(even) {
-    background-color: #F3F4F8; /* Light gray color for even rows */
+  /* background-color: #F3F4F8; Light gray color for even rows */
+}
+.umkc-table tr {
 }
 
 h61 {
-    font-family: Oswald,sans-serif;
-    font-size: 1.5rem;
-    color: black;
+  font-family: Oswald, sans-serif;
+  font-size: 1.5rem;
+  color: black;
 }
 
-h64{
-    font-family: Oswald,sans-serif;
-    font-size: 1.5rem;
-    color: #0066CC;
+h64 {
+  font-family: Oswald, sans-serif;
+  font-size: 1.5rem;
+  color: #0066cc;
 }
 
 .topnav-umkc-logout {
-    text-align: right;
-    padding: 10px;
+  text-align: right;
+  padding: 10px;
 }
 
 .topnav-umkc-logout button {
-    background-color: #002D72; /* UMKC blue color */
-    color: #fff; /* White text color */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #002d72; /* UMKC blue color */
+  color: #fff; /* White text color */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .topnav-umkc-logout button:hover {
-    background-color: yellow; /* Hover color */
+  background-color: yellow; /* Hover color */
 }
 .topnav-umkc-logout {
-    background-color: #0066CC;
-    overflow: hidden;
-  }
+  background-color: #0066cc;
+  overflow: hidden;
+}
 
-  .btn btn-apply float-end{
-    text-align: right;
-  }
+.btn btn-apply float-end {
+  text-align: right;
+}

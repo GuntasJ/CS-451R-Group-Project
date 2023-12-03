@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css_files/application.css">
     <link rel="stylesheet" type="text/css" href="../css_files/dashboard.css">
     <link rel="icon" href="https://www.umkc.edu/favicon.ico">
@@ -18,11 +18,72 @@
     <link href="https://www.umkc.edu/global-assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://www.umkc.edu/global-assets/css/global.css" rel="stylesheet">
     <title>Student Home</title>
+    <style>
+        .selected-row {
+            background-color: #dbdbdb !important;
+        }
+
+        body {
+            background-color: whitesmoke;
+            color: #044c7c;
+        }
+
+        .container {
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            background-color: white;
+        }
+
+        table.dataTable {
+            clear: both;
+            margin-top: none !important;
+            margin-bottom: 6px !important;
+            max-width: none !important;
+            /* border-collapse: separate !important; */
+            border-spacing: 0;
+        }
+
+        .btn-apply {
+            background-color: #FFdd00;
+            border-color: #FFdd00;
+            color: #044c7c;
+            margin-right: 25px;
+            width: max-content;
+            font-weight: bolder;
+        }
+
+        .btn-apply:hover {
+            background-color: #044c7c;
+            color: #FFdd00;
+            box-shadow: 3px 3px 3px #FFdd00;
+        }
+
+        .submit-btn {
+            color: white;
+            background-color: #0066cc;
+            font-weight: bolder;
+        }
+
+        .submit-btn:hover {
+            background-color: #FFdd00;
+            border-color: #FFdd00;
+            color: #0066cc;
+            font-weight: bolder;
+        }
+
+        .pad {
+            padding-right: 2rem !important;
+        }
+    </style>
+
+
 </head>
 
 
 <body>
     <!-- header -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
     <script type="module" src="../js_files/student_dashboard.js"></script>
     <div class="container-fluid sd-top-header bg-umkc-blue header-blue-strips" id="header">
         <div class="row p-2">
@@ -53,13 +114,13 @@
     </div>
     <br>
     <div class="logout-class">
-        <a id="logout" href="../main_pages/application_management.html" class="btn btn-apply float-end">Logout</a>
+        <a id="logout" href="../main_pages/application_management.html" class="me-4 btn btn-apply float-end">Logout</a>
     </div>
 
 
     <div class="management">
         <div class="welcome_student">
-            <h2 id="student-name">Welcome, Student</h2>
+            <h2 id="student-name"></h2>
             <h61>Welcome to your very own dashboard! This will serve as a place where you can
                 check the status of your applications or create a new one!
             </h61>
@@ -82,26 +143,56 @@
         <hr>
         <p><br><strong></strong>&nbsp;
         <div class="application-management">
-            <table class="umkc-table" id="dashboard-table">
+            <table class="umkc-table table table-hover text-wrap" id="dashboard-table">
                 <h30>Application Status</h30>
                 <thead>
                     <tr>
                         <th>Course Number</th>
                         <th>Position Type</th>
                         <th>Status</th>
-                        <th></th>
+                        <!-- <th></th> -->
                     </tr>
                 </thead>
-                <tbody>
-
+                <tbody></tbody>
+            </table>
         </div>
-
-        </tbody>
-        </table>
+        <div>
+            <button id="withdraw-button" class="mt-4 btn submit-btn float-end" data-bs-toggle="modal"
+                data-bs-target="#withdraw-confirmation">Withdraw</button>
+        </div>
     </div>
     &nbsp;</p>
     <hr>
     </div>
+
+    <div class="modal fade" id="withdraw-confirmation" tabindex="-1" aria-labelledby="withdraw-confirmation-label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="withdraw-confirmation-label">Withdraw Application?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-title">Once you withdraw the application, it will be gone forever. You will have to
+                        make a new application again.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" id="withdraw-confirmation-button">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- closePositionButton.setAttribute("id", `close_button_${cleanPositionId}`);
+  closePositionButton.setAttribute("value", "");
+  closePositionButton.setAttribute("class", "input-group-btn btn btn-card");
+  closePositionButton.setAttribute("data-bs-toggle", "modal");
+  closePositionButton.setAttribute(
+    "data-bs-target",
+    "#close_confirmation_modal"
+  ); -->
     <!--FOOTER-->
     <footer>
 

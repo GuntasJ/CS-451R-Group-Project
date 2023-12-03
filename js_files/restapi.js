@@ -220,9 +220,65 @@ export async function addNewApplicationWithFile(
   return data;
 }
 
+export async function approveApplication(applicationId, token) {
+  const response = await fetch(
+    `${baseApiPath}/applications/${applicationId}/status`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify("APPROVED"),
+    }
+  );
+  const data = await response.json();
+  return data;
+}
+
+export async function rejectApplication(applicationId, token) {
+  const response = await fetch(
+    `${baseApiPath}/applications/${applicationId}/status`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify("REJECTED"),
+    }
+  );
+  const data = await response.json();
+  return data;
+}
+
+export async function restoreApplicationToPending(applicationId, token) {
+  const response = await fetch(
+    `${baseApiPath}/applications/${applicationId}/status`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify("PENDING"),
+    }
+  );
+  const data = await response.json();
+  return data;
+}
+
 export async function updateApplication() {}
 
-export async function deleteApplication() {}
+export async function deleteApplication(applicationId, token) {
+  const response = fetch(`${baseApiPath}/applications/${applicationId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
 
 //file transfer
 

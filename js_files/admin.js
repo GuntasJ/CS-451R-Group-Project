@@ -60,6 +60,34 @@ function filterPositions(positions) {
     );
   }
 
+  //position
+  if (document.getElementById("Grader").checked) {
+    filteredPositions = filteredPositions.filter(
+      (position) => position["positionType"] == "Grader"
+    );
+  } else if (document.getElementById("Instructor").checked) {
+    filteredPositions = filteredPositions.filter(
+      (position) => position["positionType"] == "Lab Instructor"
+    );
+  }
+
+  //majors
+  if (document.getElementById("CS").checked) {
+    filteredPositions = filteredPositions.filter((position) =>
+      position["positionClass"].includes("CS")
+    );
+  } else if (document.getElementById("IT").checked) {
+    filteredPositions = filteredPositions.filter((position) =>
+      position["positionClass"].includes("IT")
+    );
+  } else if (document.getElementById("ECE").checked) {
+    filteredPositions = filteredPositions.filter((position) =>
+      position["positionClass"].includes("ECE")
+    );
+  }
+
+  console.log(filteredPositions);
+
   return filteredPositions;
 }
 
@@ -334,6 +362,12 @@ function deconstructPositionId(modifiedPositionId) {
 
 window.onload = function () {
   displayAllPositions(false);
+
+  document
+    .getElementById("resetFilter")
+    .addEventListener("click", function (e) {
+      location.reload();
+    });
 
   document
     .getElementById("edit_notes_modal_button")
