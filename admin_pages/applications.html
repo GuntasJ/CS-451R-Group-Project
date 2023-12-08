@@ -98,22 +98,26 @@
 						<label class="filter-label pe-3">Major:</label>
 						<div class="form-check" id="major">
 							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
-									name="maj" value="CS">CS</label>
+									name="maj" value="CS" id="cs-degree-box" checked>CS</label>
 							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
-									name="maj" value="IT">IT</label>
+									name="maj" value="IT" id="it-degree-box" checked>IT</label>
+							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
+									name="maj" value="ECE" id="ece-degree-box" checked>ECE</label>
+							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
+									name="maj" value="EE" id="ee-degree-box" checked>EE</label>
 
 						</div>
 					</div>
 
 					<div class="filter-phone" style="display:inline-flex ;">
-						<label class="ps-3 filter-label pe-3">Level:</label>
-						<div class="form-check" id="level">
+						<label class="ps-3 filter-label pe-3">Standing:</label>
+						<div class="form-check" id="app-standing-div">
 							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
-									name="lev" value="BS">BS</label>
+									name="lev" value="BS" id="bs-standing-box" checked>BS</label>
 							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
-									name="lev" value="MS">MS</label>
+									name="lev" value="MS" id="ms-standing-box" checked>MS</label>
 							<label class="checkbox form-check-label pad"><input class="form-check-input" type="checkbox"
-									name="lev" value="PhD">PhD</label>
+									name="lev" value="PhD" id="phd-standing-box" checked>PhD</label>
 						</div>
 					</div>
 
@@ -140,7 +144,6 @@
 							<th style="width: 11%;" scope="col">Major</th>
 							<th style="width: 11%;" scope="col">GPA</th>
 							<th style="width: 11%;" scope="col">Hours</th>
-							<!-- <th style="width: 10%;" scope="col">GTA Status</th> -->
 							<th style="width: 11%;" scope="col">Documents</th>
 							<th style="width: 11%;" scope="col">Application Status</th>
 							<th></th>

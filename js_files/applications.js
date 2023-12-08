@@ -114,6 +114,55 @@ async function addStudentRows() {
       continue;
     }
 
+    if (
+      !document.getElementById("cs-degree-box").checked &&
+      applicationList[i]["currentMajor"] == "Computer Science"
+    ) {
+      continue;
+    }
+
+    if (
+      !document.getElementById("it-degree-box").checked &&
+      applicationList[i]["currentMajor"] == "Information Technology"
+    ) {
+      continue;
+    }
+
+    if (
+      !document.getElementById("ece-degree-box").checked &&
+      applicationList[i]["currentMajor"] == "Electrical Computer Engineering"
+    ) {
+      continue;
+    }
+
+    if (
+      !document.getElementById("ee-degree-box").checked &&
+      applicationList[i]["currentMajor"] == "Electrical Engineering"
+    ) {
+      continue;
+    }
+
+    if (
+      !document.getElementById("bs-standing-box").checked &&
+      applicationList[i]["standing"] == "BS"
+    ) {
+      continue;
+    }
+
+    if (
+      !document.getElementById("ms-standing-box").checked &&
+      applicationList[i]["standing"] == "MS"
+    ) {
+      continue;
+    }
+
+    if (
+      !document.getElementById("phd-standing-box").checked &&
+      applicationList[i]["standing"] == "PhD"
+    ) {
+      continue;
+    }
+
     let row = document.createElement("tr");
     let cell1 = document.createElement("td");
     let cell2 = document.createElement("td");
@@ -253,6 +302,48 @@ window.addEventListener("load", async function () {
     });
   this.document
     .getElementById("approved-status")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("cs-degree-box")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("it-degree-box")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("ece-degree-box")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("ee-degree-box")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("bs-standing-box")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("ms-standing-box")
+    .addEventListener("click", async function (e) {
+      removeStudentRows();
+      await addStudentRows();
+    });
+  this.document
+    .getElementById("phd-standing-box")
     .addEventListener("click", async function (e) {
       removeStudentRows();
       await addStudentRows();

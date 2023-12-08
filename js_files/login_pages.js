@@ -50,7 +50,9 @@ async function addLoginOnButton() {
           location.href = "../admin_pages/admin.html";
         }
       } else {
-        alert("Email and password do not match!");
+        let modal = document.getElementById("incorrect-cred");
+        let bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
       }
     });
 }

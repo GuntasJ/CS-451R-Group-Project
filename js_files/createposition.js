@@ -51,10 +51,13 @@ window.addEventListener("load", function () {
         sessionStorage.getItem("jwtToken")
       );
       if (!response.ok) {
-        alert(
-          `The position with class name ${positionInfo[0]} and position type ${positionInfo[3]} already exists!`
-        );
-        location.reload();
+        // alert(
+        //   `The position with class name ${positionInfo[0]} and position type ${positionInfo[3]} already exists!`
+        // );
+        let modal = document.getElementById("invalid-position");
+        let bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+        //location.reload();
       } else {
         location.href = "admin.html";
       }
