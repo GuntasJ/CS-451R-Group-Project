@@ -36,13 +36,6 @@
         <div>
             <a id="logout" href="../main_pages/application_management.html" class="btn btn-apply float-end">Logout</a>
         </div>
-        <!-- <div class="input-group search-bar">
-            <input type="text" id="Search" onkeyup="Search()" class="form-control search-input"
-                placeholder="Search Class" aria-label="Search Position" aria-describedby="search-addon" />
-            <span class="btn search-btn float-end" id="advanced-search-button" type="button">
-                <i class="fa fa-search"></i>
-            </span>
-        </div> -->
     </div>
 
     <div class="mb-3 p-3 card filter card-filter sticky-left">
@@ -95,51 +88,9 @@
 
     <div class="row open-position-container" id="open-position-container">
         <div class="col-sm-4" id="sample">
-            <!-- <div class="card mb-3 class-card" id="card">
-                <a id="title" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                    <h5 class="card-header target">
-                        <span id="classname">IT 451R </span> (<spanid="semester">Fall/Spring</span>)<span class="float-end right-card-title" id="applicants">0 Applicants</span></h5>
-                </a>
-                <div class="card-body collapse" id="collapseOne">
-                    <label class="card-title mt-2 mb-3">Position: <span id="position">Grader</span></label> <br>
-                    <label class="card-title float-start">Notes: </label>
-                    <div class="notes-wrapper admin-notes">
-                        <span id="notes">None</span>
-                    </div>
-                    <a id="seebutton" href="" value="" class="mt-2 btn open-position-btn btn-card"
-                        style="height:50px; line-height:35px;">See Applicants</a>
-                    <div class="mt-2 open-position-input-group input-group float-end">
-                        <a id="editbutton" href="" value="" onclick="openForm()" class="input-group-btn btn btn-card">Edit Notes</a>
-
-                        <button id="closebutton" value="" class="input-group-btn btn btn-card">Close Position</button>
-                        <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="adminModalLabel">Remove <span id="course-remove-title"></span></h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  Are you sure you want to remove <span id="course-remove-body"></span>? 
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary ok">Yes</button>
-                                  <button type="button" class="btn btn-primary cancel" data-bs-dismiss="modal" aria-label="Close">No</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                    <br>
-                </div>
-            </div> -->
+        
         </div>
     </div>
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">
-    <span class="glyphicon glyphicon-trash">LName FNmae</span>
-    
-    </button> -->
 
     <!-- Modal -->
     <div class="modal fade" id="edit_notes_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -147,12 +98,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
                     <h4 class="modal-title" id="edit_notes_modal_h4">Edit Notes</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <!-- <label for="comment">Comment:</label> -->
                         <textarea class="form-control" rows="5" id="edit_notes_modal_text_area"></textarea>
                     </div>
                 </div>
@@ -163,10 +112,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#close_confirmation_modal">
-        Launch demo modal
-    </button> -->
     <div class="modal fade" id="close_confirmation_modal" tabindex="-1" aria-labelledby="close_confirmation_label"
         aria-hidden="true">
         <div class="modal-dialog">
